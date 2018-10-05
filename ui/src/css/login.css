@@ -1,0 +1,22 @@
+/* Created on 04/10/2018 by Vanvaraju A */
+
+.login {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+}
+.login form {
+  background: #f8f8f8;
+  border: 1px solid #ccc;
+  margin: 0 0 10px 0;
+  padding: 1.5em;
+}
+.login h3 {
+  background: #333;
+  border-radius: 5px 5px 0 0;
+  color: #fff;
+  margin: 0;
+  padding: 8px 0;
+}
