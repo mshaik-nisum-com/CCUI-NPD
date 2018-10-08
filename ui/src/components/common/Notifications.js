@@ -8,7 +8,7 @@ class Notifications extends Component {
             error: 'alert-danger',
             success: 'alert-success',
             warning: 'alert-warning',
-            info: 'info'
+            info: 'alert-info'
         }
         this.refValue = React.createRef();
     }
