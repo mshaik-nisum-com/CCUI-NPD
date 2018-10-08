@@ -4,13 +4,15 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var fs = require("fs");
 var logger = require("morgan");
+var constant = require("./constants/constants");
 require("dotenv").config();
-require("./dataSource/dataSource");
+
+require(constant.DATASOURCE);
 var cors = require("cors");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var marketRouter = require("./routes/markets");
+var indexRouter = require(constant.INDEXROUTER);
+var usersRouter = require(constant.USERROUTER);
+var marketRouter = require(constant.MARKETROUTER);
 
 var app = express();
 
@@ -19,14 +21,14 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
 // create a write stream (in append mode)
-var accessLogStream = fs.createWriteStream(__dirname + "/access.log", {
+var accessLogStream = fs.createWriteStream(__dirname + constant.LOGS, {
   flags: "a"
 });
 // setup the logger
 app.use(logger("combined", { stream: accessLogStream }));
-logger//app.use(logger("dev"));
-.app
-  .use(express.json());
+
+//app.use(logger("dev"));
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
@@ -35,7 +37,7 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/markets", marketRouter);
+app.use(constant.MARKETS, marketRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

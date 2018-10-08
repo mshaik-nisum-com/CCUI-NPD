@@ -15,12 +15,9 @@ module.exports = {
 
   fetchBrands: (req, res) => {
     var query = { marketId: req.params.marketId };
-    console.log("Fetch Brands");
     Market.find(query)
       .then(function(marketRes) {
-        console.log("marketRes", marketRes);
         var brandIds = marketRes[0].brands;
-        console.log("brandIds",brandIds);
         Brand.find({ brandCode: { $in: brandIds } }).then(function(data) {
           res.json({data});
         });
