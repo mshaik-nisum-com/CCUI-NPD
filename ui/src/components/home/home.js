@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Header from '../Header/index'
-import Sidebar from '../Sidebar/index'
-import Mainbody from '../Mainbody/index'
+import Header from '../header/index'
+import Sidebar from '../sidebar/index'
+import Mainbody from '../mainbody/index'
 
 class Homepage extends Component {
     state = {  }

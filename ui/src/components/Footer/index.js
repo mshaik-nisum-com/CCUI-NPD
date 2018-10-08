@@ -5,9 +5,9 @@ class Footer extends Component {
     render() { 
         return ( 
             <div>
-                <footer class="sticky-footer">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
+                <footer className="sticky-footer">
+                    <div className="container my-auto">
+                        <div className="copyright text-center my-auto">
                             <span>Copyright © Your Website 2018</span>
                         </div>
                     </div>

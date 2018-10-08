@@ -5,18 +5,18 @@ class Sidebar extends Component {
     render() { 
         return ( 
             <div>
-                <ul class="sidebar navbar-nav">
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <ul className="sidebar navbar-nav">
+                    <li className="nav-item dropdown">
+                    <a href="/" className="nav-link dropdown-toggle" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {/* <i class="fas fa-fw fa-folder"></i> */}
                         <span>Find Style</span>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                        <div class="form-group">
+                    <div className="dropdown-menu" aria-labelledby="pagesDropdown">
+                        <div className="form-group">
                             <label>Product ID</label>
                             <input class="form-control" placeholder="Enter ID" />
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                             <label>Brand</label>
                             <select className="form-control">
                                 <option>Select Brand </option>
@@ -27,8 +27,8 @@ class Sidebar extends Component {
                         
                     </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="charts.html">
+                    <li className="nav-item">
+                        <a className="nav-link" href="/">
                         {/* <i class="fas fa-fw fa-chart-area"></i> */}
                         <span>Custom Search</span></a>
                     </li>
