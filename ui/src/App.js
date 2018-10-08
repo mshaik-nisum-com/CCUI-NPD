@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Login from './components/login/Login-auth';
-import Homepage from './components/home/home';
+import Homepage from './components/home';
 import './css/common.css';
 import '../src/css/bootstrap-cdn.css'
 

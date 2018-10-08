@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Footer from '../footer/index'
+import Footer from '../footer'
 
 class Mainbody extends Component {
     state = {  }
