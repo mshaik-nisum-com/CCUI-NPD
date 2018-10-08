@@ -13,15 +13,16 @@ module.exports = {
       });
   },
 
-  fetchMarkets: (req, res) => {
+  fetchBrands: (req, res) => {
     var query = { marketId: req.params.marketId };
-    console.log("Fetch Markets");
+    console.log("Fetch Brands");
     Market.find(query)
       .then(function(marketRes) {
         console.log("marketRes", marketRes);
-        var brandIds = marketRes[0].brandId;
-        Brand.find({ brandId: { $in: brandIds } }).then(function(data) {
-          res.json({ marketId: req.params.marketId, data });
+        var brandIds = marketRes[0].brands;
+        console.log("brandIds",brandIds);
+        Brand.find({ brandCode: { $in: brandIds } }).then(function(data) {
+          res.json({data});
         });
       })
       .catch(error => {

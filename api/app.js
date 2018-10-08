@@ -2,24 +2,15 @@ var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
+var fs = require("fs");
 var logger = require("morgan");
 require("dotenv").config();
-//var cors = require("cors");
+require("./dataSource/dataSource");
+var cors = require("cors");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var marketRouter = require("./routes/markets");
-
-var mongoose = require("mongoose");
-
-//For Connecting cloud hosted mongo db
-mongoose.connect(
-  process.env.MONGO_URL,
-  { useNewUrlParser: true, autoIndex: false },
-  () => {
-    console.log("DB Connected...!");
-  }
-);
 
 var app = express();
 
@@ -27,13 +18,20 @@ var app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
-app.use(logger("dev"));
-app.use(express.json());
+// create a write stream (in append mode)
+var accessLogStream = fs.createWriteStream(__dirname + "/access.log", {
+  flags: "a"
+});
+// setup the logger
+app.use(logger("combined", { stream: accessLogStream }));
+logger//app.use(logger("dev"));
+.app
+  .use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 //Enabling cross origin
-//app.use(cors);
+app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);

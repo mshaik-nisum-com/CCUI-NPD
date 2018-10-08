@@ -6,7 +6,7 @@ var marketController = require("../controllers/marketController");
 
 router.get("/marketList", marketController.marketList);
 
-router.get("/fetchMarkets/:marketId", marketController.fetchMarkets);
+router.get("/fetchBrands/:marketId", marketController.fetchBrands);
 
 //router.post("/addMarkets", marketController.addMarkets);
 
