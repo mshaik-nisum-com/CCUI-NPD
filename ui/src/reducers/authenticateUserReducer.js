@@ -45,4 +45,19 @@ export const bindLoginInputs = (state=[], action) => {
     
 }
 
+export const validation = (state=[], action) => {
+    switch (action.type) {
+      case 'VALIDATION_MSG':
+        return {
+            ...state,
+            msg: action.text
+        }
+        default:
+        return {
+            ...state
+        }
+    }
+    
+}
+
 //export default authenticateUser;

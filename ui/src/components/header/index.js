@@ -6,7 +6,7 @@ class Header extends Component {
         return ( 
             <div>
                 <nav className="navbar navbar-expand navbar-dark bg-dark static-top">
-                <a className="navbar-brand mr-1" href="index.html">CCUI 2.0</a>
+                <a className="navbar-brand mr-1">CCUI 2.0</a>
                 {/* <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
                     <i class="fas fa-bars"></i>
                 </button> */}
@@ -40,7 +40,7 @@ class Header extends Component {
                                 <i className="fas fa-user-circle fa-fw"></i>
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                <a href="/" className="dropdown-item" data-toggle="modal" data-target="#logoutModal"><b>Agent: CCUI23_US</b></a>
+                                <a href="/" className="dropdown-item" data-toggle="modal" data-target="#logoutModal"><b>{this.props.userInfo.username}</b></a>
                                 <a href="/" className="dropdown-item" data-toggle="modal" data-target="#logoutModal">Logout</a>
                             </div>
                         </li>

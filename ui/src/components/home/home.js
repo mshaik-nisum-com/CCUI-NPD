@@ -8,7 +8,7 @@ class Homepage extends Component {
     render() { 
         return ( 
             <div>
-                <Header />
+                <Header userInfo={this.props.userInfo}/>
                 <div id="wrapper">
                     <Sidebar />
                     <div id="content-wrapper">

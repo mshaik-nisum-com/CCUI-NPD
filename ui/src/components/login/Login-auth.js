@@ -4,7 +4,8 @@ import Countrieslist from '../common/Countrieslist';
 import Inputfield from '../common/Inputfield';
 import Button from '../common/Button';
 import Homepage from '../home/home';
-import { authenticateUser,bindUsername,bindPassword,bindMarket } from '../../actions'
+import { landingPage,bindUsername,bindPassword,bindMarket,validation } from '../../actions'
+import { authenticateUserCredintails } from '../../middlewares';
 
 
 import '../../css/login.css'
@@ -19,20 +20,29 @@ class Login extends Component {
 
     validate(usercredentials){
 
-        if(usercredentials.username==="" && usercredentials.username===null){
+        if(usercredentials.username==="" || usercredentials.username===undefined){
+            this.props.dispatch(validation('username should not be empty'));
             return false;
-        }else if(usercredentials.password==="" && usercredentials.password===null){
+        }else if(usercredentials.password==="" || usercredentials.password===undefined){
+            this.props.dispatch(validation('password should not be empty'));
+            return false;
+        }else if(usercredentials.market==="" || usercredentials.market===undefined){
+            this.props.dispatch(validation('market should not be empty'));
+ 
+            return false;
+        }else{
             return true;
         }
+        
     }
 
     authenticate(e){
         e.preventDefault();
 
     var usercredentials= this.props.loginInputs;
-    //if(this.validate(usercredentials)){
-      this.props.dispatch(authenticateUser(usercredentials));
-    //}
+    if(this.validate(usercredentials)){
+      this.props.dispatch(landingPage(usercredentials));
+    }
     }
     bindUsername(evt){
         this.props.dispatch(bindUsername(evt.target.value));
@@ -47,7 +57,7 @@ class Login extends Component {
 
     render() { 
         if(this.props.status){
-          return <Homepage/>
+          return <Homepage userInfo={this.props.authenticationSuccess}/>
         } else {
             return ( 
                 <div className="login">
@@ -55,8 +65,8 @@ class Login extends Component {
                 {/* <div className="alert alert-danger alert-dismissable">
                     <strong>{this.props.authenticationFail}</strong>
                 </div> */}
-                {this.props.authenticationFail ? <div className='alert alert-danger'>
-                    {this.props.authenticationFail}
+                {this.props.validationMsg ? <div className='alert alert-danger'>
+                    {this.props.validationMsg}
                     <div className="close-icn">x</div>
                 </div> : ''}
                 
@@ -83,6 +93,8 @@ const mapStateToProps = (state) => {
     debugger
     return{
         status: state.authenticateUser.status,
+        validationMsg: state.validation.msg,
+        authenticationSuccess:state.authenticateUser.authenticationSuccess,
         authenticationFail: state.authenticateUser.authenticationFail,
         loginInputs: state.bindLoginInputs
     }
