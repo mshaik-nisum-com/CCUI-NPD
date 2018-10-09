@@ -20,7 +20,10 @@
   margin: 0;
   padding: 8px 0;
 }
-.close-icn {
+.hidden {
+  display: none
+}
+.close-icon {
   font-size: 17px;
   line-height: 20px;
   color: #464141;
