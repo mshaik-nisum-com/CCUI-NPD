@@ -8,6 +8,7 @@ import logger from 'redux-logger'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import reducer from './reducers'
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
@@ -16,10 +17,10 @@ import * as serviceWorker from './serviceWorker';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-// const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk, logger)))
+ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk, logger)))
 
 ReactDOM.render(
-<Provider>
+<Provider store={store}>
     <BrowserRouter>
         <App />
     </BrowserRouter>

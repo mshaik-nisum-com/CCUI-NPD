@@ -20,12 +20,14 @@
   margin: 0;
   padding: 8px 0;
 }
-
 .hidden {
   display: none
 }
-
 .close-icon {
-  float: right;
+  font-size: 17px;
+  line-height: 20px;
+  color: #464141;
   cursor: pointer;
+  display: inline-block;
+  float: right;
 }
