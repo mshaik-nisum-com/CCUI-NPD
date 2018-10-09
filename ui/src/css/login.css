@@ -20,3 +20,11 @@
   margin: 0;
   padding: 8px 0;
 }
+.close-icn {
+  font-size: 17px;
+  line-height: 20px;
+  color: #464141;
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+}
