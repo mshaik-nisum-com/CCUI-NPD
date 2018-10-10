@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import Homepage from '../components/home/home';
-import '../../css/login.css'
-import LoginComponent from '../components/login/LoginComponent';
+import Home from '../components/home/Home';
+import Login from '../components/login/Login';
 
-class MainContainer extends Component {
+class Main extends Component {
     state = {  }
 
     constructor(props) {
@@ -13,9 +12,9 @@ class MainContainer extends Component {
 
     render() { 
         if(this.props.status){
-          return <Homepage userInfo={this.props.authenticationSuccess}/>
+          return <Home userInfo={this.props.authenticationSuccess}/>
         } else {
-          return <LoginComponent loginInputs={this.props.loginInputs}/>
+          return <Login validationMsg={this.props.validationMsg} loginInputs={this.props.loginInputs}/>
         }
     }
 }
@@ -30,6 +29,6 @@ const mapStateToProps = (state) => {
     }
   }
 
-  MainContainer = connect(mapStateToProps)(MainContainer)
+  Main = connect(mapStateToProps)(Main)
 
-export default MainContainer
+export default Main

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Inputfield extends Component {
+class InputField extends Component {
     state = {  }
     render() { 
         return ( 
@@ -12,4 +12,4 @@ class Inputfield extends Component {
     }
 }
  
-export default Inputfield;
+export default InputField;

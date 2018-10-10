@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Header from '../header/index'
-import Sidebar from '../sidebar/index'
-import Mainbody from '../mainbody/index'
+import Header from '../header'
+import Sidebar from '../sidebar'
+import Mainbody from '../mainbody'
 
-class Homepage extends Component {
+class Home extends Component {
     state = {  }
     render() { 
         return ( 
@@ -20,4 +20,4 @@ class Homepage extends Component {
     }
 }
  
-export default Homepage;
+export default Home;

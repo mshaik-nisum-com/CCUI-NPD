@@ -21,7 +21,20 @@ class Notification extends Component {
         }
     }
 
+    removeHiddenClass(self) {
+        if (self.refValue && self.refValue.current) {
+            self.refValue.current.classList.remove('hidden')
+        }
+    }
+
+    addHiddenClass(self) {
+        if (self.refValue && self.refValue.current) {
+            self.refValue.current.classList.add('hidden')
+        }
+    }
+
     render() {
+        this.removeHiddenClass(this)
         return (
             <div className={`alert ${this.notificationTypes[this.props.type]}`} ref={this.refValue}>{this.props.message}
                 {this.props.enableCloseIcon ? <b className="close-icon" onClick={this.closeMessage.bind(this)}>x</b> : ''}
@@ -29,12 +42,12 @@ class Notification extends Component {
         )
     }
 
-    componentDidMount() {
+    componentDidUpdate() {
         const self = this;
         const timer = parseInt(this.props.autoCloseTime);
         if (timer) {
             setTimeout(() => {
-                self.refValue.current.classList.add('hidden')
+                self.addHiddenClass(self)
             }, timer)
         }
     }

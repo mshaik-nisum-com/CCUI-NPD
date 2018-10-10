@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Countrieslist extends Component {
+class MarketList extends Component {
     state = {  }
     render() { 
         return ( 
@@ -16,4 +16,4 @@ class Countrieslist extends Component {
     }
 }
  
-export default Countrieslist;
+export default MarketList;

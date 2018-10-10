@@ -1,21 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Countrieslist from '../common/Countrieslist'
-import Inputfield from '../common/Inputfield'
+import MarketList from '../common/MarketList'
+import InputField from '../common/InputField'
 import Button from '../common/Button'
+import Constants from '../common/Constants'
+import Notification from '../common/Notification'
 import { landingPage,bindUsername,bindPassword,bindMarket,validation } from '../../actions'
+import '../../css/login.css'
 
-class LoginComponent extends Component {
+class Login extends Component {
 
     validate(usercredentials){
         if (usercredentials.username === "" || !usercredentials.username) {
-            this.props.dispatch(validation('username should not be empty'));
+            this.props.dispatch(validation('Username should not be empty'));
             return false;
         } else if (usercredentials.password === "" || !usercredentials.password) {
-            this.props.dispatch(validation('password should not be empty'));
+            this.props.dispatch(validation('Password should not be empty'));
             return false;
         } else if (usercredentials.market === "" || !usercredentials.market) {
-            this.props.dispatch(validation('market should not be empty'));
+            this.props.dispatch(validation('Market should not be empty'));
             return false;
         } else {
             return true;
@@ -45,21 +48,19 @@ class LoginComponent extends Component {
     render() {
         return (
             <div className="login">
-                {this.props.validationMsg ? <div className='alert alert-danger'>
-                    {this.props.validationMsg}
-                    <div className="close-icn">x</div>
-                </div> : ''}
+
+                {this.props.validationMsg ? <Notification type={Constants.type} enableCloseIcon={Constants.enable} autoCloseTime={Constants.time} message={this.props.validationMsg} /> : ''}
                 
                 <h3 className="text-center">Login</h3>
                 <form >  
                     <div className="form-group">
-                        <Inputfield inputType="text" inputStyle="" onChangeFunction={this.bindUsername.bind(this)} labelText="Username" elId="username" />
+                        <InputField inputType="text" inputStyle="" onChangeFunction={this.bindUsername.bind(this)} labelText="Username" elId="username" />
                     </div>
                     <div className="form-group">
-                        <Inputfield inputType="password" inputStyle="" labelText="Password" onChangeFunction={this.bindPassword.bind(this)} elId="password"  />
+                        <InputField inputType="password" inputStyle="" labelText="Password" onChangeFunction={this.bindPassword.bind(this)} elId="password"  />
                     </div>
                     <div className="form-group">
-                        <Countrieslist labelText="Select Country" inputStyle="" onChangeMarket={this.bindMarket.bind(this)} elId="countries"  />
+                        <MarketList labelText="Select Country" inputStyle="" onChangeMarket={this.bindMarket.bind(this)} elId="countries"  />
                     </div>
                     <Button btnStyle="btn-success btn-block" btnType="button" onClickFunction={this.authenticate.bind(this)} btnText="Submit" />
                 </form>
@@ -69,6 +70,6 @@ class LoginComponent extends Component {
     }
 }
 
-LoginComponent = connect()(LoginComponent)
+Login = connect()(Login)
 
-export default LoginComponent
+export default Login

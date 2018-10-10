@@ -2,7 +2,9 @@
 
 const Constants = {
     type: 'error',
-    message: 'Error message here'
+    errorMsg: 'Error message here',
+    time: 5000,
+    enable: true
 }
 
 export default Constants
