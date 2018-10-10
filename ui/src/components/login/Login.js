@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import MarketList from '../common/MarketList'
-import InputField from '../common/InputField'
+import Markets from '../../containers/Markets'
+import InputField from '../common/Inputfield'
 import Button from '../common/Button'
 import Constants from '../common/Constants'
 import Notification from '../common/Notification'
@@ -60,7 +60,7 @@ class Login extends Component {
                         <InputField inputType="password" inputStyle="" labelText="Password" onChangeFunction={this.bindPassword.bind(this)} elId="password"  />
                     </div>
                     <div className="form-group">
-                        <MarketList labelText="Select Country" inputStyle="" onChangeMarket={this.bindMarket.bind(this)} elId="countries"  />
+                        <Markets labelText="Select Country" inputStyle="" onChangeMarket={this.bindMarket.bind(this)} elId="countries"  />
                     </div>
                     <Button btnStyle="btn-success btn-block" btnType="button" onClickFunction={this.authenticate.bind(this)} btnText="Submit" />
                 </form>

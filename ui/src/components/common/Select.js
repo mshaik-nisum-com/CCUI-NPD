@@ -1,0 +1,39 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+
+class Select extends Component {
+    render() {
+        let list
+        let listOfItems
+        if (this.props.options) {
+            list = this.props.options;
+            listOfItems = list.map((item) => {
+                return (
+                    <option key={item.key}>{item.value}</option>
+                )
+            })
+        } else {
+            return (
+                <option>Loading.....</option>
+            );
+        }
+        return (
+            <div>
+                <label className={`form-label ${this.props.noLabel ? this.props.noLabel : ''}`} >{this.props.labelText}</label>
+                <select className="form-control">
+                    <option>Select Market</option>
+                    {listOfItems}
+                </select>
+            </div>
+        );
+    }
+}
+Select.propTypes = {
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            key: PropTypes.number.isRequired,
+            value: PropTypes.string.isRequired
+        })
+    )
+};
+export default Select;
