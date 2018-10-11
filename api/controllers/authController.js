@@ -1,5 +1,10 @@
 var authDao = require("../dao/authDao");
 module.exports = {
+
+  register : function(request, response) {
+        authDao.register(request, response);
+    },
+
   login: function(request, response) {
     authDao.login(request, response);
   },
