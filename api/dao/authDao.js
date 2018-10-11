@@ -1,7 +1,27 @@
 var User = require("../models/user");
 var jwt = require("jsonwebtoken");
+var Cryptr = new require('cryptr');
+var cryptr = new Cryptr(process.env.CRYPTR_KEY);
 
 module.exports = {
+
+    register: function(request, response) {
+        var name = request.body.name;
+        var email = request.body.email;
+        var password = cryptr.encrypt(request.body.password);
+        var user = new User({
+            name , email, password
+        })
+        user.save().then(function (user) {
+            response.json({
+                name : user.name,
+                email : user.email
+            })
+        }).catch(function (error) {
+            response.status(400).json(error);
+        })
+    },
+
   login: function(request, response) {
     var email = request.body.email;
     var password = request.body.password;
@@ -15,6 +35,7 @@ module.exports = {
           );
           request.session.isExist = true;
           request.session.email = user.email;
+
           response.send({
             name: user.name,
             email: user.email,
