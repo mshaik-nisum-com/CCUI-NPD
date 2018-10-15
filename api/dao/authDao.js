@@ -9,16 +9,25 @@ module.exports = {
         var name = request.body.name;
         var email = request.body.email;
         var password = cryptr.encrypt(request.body.password);
+        var roleId = request.body.roleId;
         var user = new User({
             name , email, password
         })
-        user.save().then(function (user) {
-            response.json({
-                name : user.name,
-                email : user.email
-            })
-        }).catch(function (error) {
-            response.status(400).json(error);
+        User.findOne({email}).then(function (data) {
+            if(data) {
+                response.status(400).json({"errMsg":"Email Already Exists"});
+
+            }else{
+                user.save().then(function (user) {
+                    response.json({
+                        name: user.name,
+                        email: user.email
+                    })
+                }).catch(function (error) {
+                    response.status(400).json(error);
+                })
+            }
+
         })
     },
 
