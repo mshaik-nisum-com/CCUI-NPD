@@ -20,7 +20,7 @@ class Select extends Component {
         return (
             <div>
                 <label className={`form-label ${this.props.noLabel ? this.props.noLabel : ''}`} >{this.props.labelText}</label>
-                <select className="form-control">
+                <select className="form-control" onChange={this.props.onChangeMarket}>
                     <option>Select Market</option>
                     {listOfItems}
                 </select>

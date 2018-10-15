@@ -5,14 +5,22 @@ import InputField from '../common/Inputfield'
 import Button from '../common/Button'
 import Constants from '../common/Constants'
 import Notification from '../common/Notification'
-import { landingPage,bindUsername,bindPassword,bindMarket,validation } from '../../actions'
+import { eraseMsg,bindUsername,bindPassword,bindMarket,validation } from '../../actions'
+import {authenticateUserCredintails} from '../../middlewares/authenticateUser'
 import '../../css/login.css'
 
 class Login extends Component {
+    constructor(props){
+        super (props);
+        this.message = {};
+    }
 
     validate(usercredentials){
-        if (usercredentials.username === "" || !usercredentials.username) {
-            this.props.dispatch(validation('Username should not be empty'));
+        if (usercredentials.email === "" || !usercredentials.email) {
+            this.message.validationMsg = 'Username should not be empty';
+             this.props.dispatch(validation('Username should not be empty'));
+            //this.props(validation('Username should not be empty'));
+
             return false;
         } else if (usercredentials.password === "" || !usercredentials.password) {
             this.props.dispatch(validation('Password should not be empty'));
@@ -29,19 +37,25 @@ class Login extends Component {
         e.preventDefault();
         const usercredentials= this.props.loginInputs;
         if (this.validate(usercredentials)) {
-            this.props.dispatch(landingPage(usercredentials));
+            this.props.dispatch(authenticateUserCredintails(usercredentials));
         }
     }
     
     bindUsername(evt){
+        this.props.dispatch(validation(''));
+        this.props.dispatch(eraseMsg(''));
         this.props.dispatch(bindUsername(evt.target.value));
     }
     
     bindPassword(evt){
+        this.props.dispatch(validation(''));
+        this.props.dispatch(eraseMsg(''));
         this.props.dispatch(bindPassword(evt.target.value));
     }
     
     bindMarket(evt){
+        this.props.dispatch(validation(''));
+         this.props.dispatch(eraseMsg(''));
        this.props.dispatch(bindMarket(evt.target.value));
     }
 
@@ -49,7 +63,8 @@ class Login extends Component {
         return (
             <div className="login">
 
-                {this.props.validationMsg ? <Notification type={Constants.type} enableCloseIcon={Constants.enable} autoCloseTime={Constants.time} message={this.props.validationMsg} /> : ''}
+                {this.props.validationMsg ? <Notification type={Constants.type} enableCloseIcon={Constants.enable} message={this.props.validationMsg} /> : ''}
+                {/* {this.props.authErrorMsg ? <Notification type={Constants.type} enableCloseIcon={Constants.enable} autoCloseTime={Constants.time} message={this.props.authErrorMsg} /> : ''} */}
                 
                 <h3 className="text-center">Login</h3>
                 <form >  

@@ -8,23 +8,26 @@ class Main extends Component {
 
     constructor(props) {
         super(props)
+        var tok= localStorage.length;
+        console.log(tok);
     }
+   
 
     render() { 
-        if(this.props.status){
+        if(this.props.isUserAuthenticated || localStorage.length>0){
           return <Home userInfo={this.props.authenticationSuccess}/>
         } else {
-          return <Login validationMsg={this.props.validationMsg} loginInputs={this.props.loginInputs}/>
+          return <Login authErrorMsg={this.props.authenticationFail} validationMsg={this.props.validationMsg} loginInputs={this.props.loginInputs}/>
         }
     }
 }
 
 const mapStateToProps = (state) => {
+    console.log(state.authenticateUser.isUserAuthenticated,"required");
     return {
-        status: state.authenticateUser.status,
-        validationMsg: state.validation.msg,
+        isUserAuthenticated: state.authenticateUser.isUserAuthenticated,
+        validationMsg: state.validation.msg || state.authenticateUser.msg,
         authenticationSuccess:state.authenticateUser.authenticationSuccess,
-        authenticationFail: state.authenticateUser.authenticationFail,
         loginInputs: state.bindLoginInputs
     }
   }

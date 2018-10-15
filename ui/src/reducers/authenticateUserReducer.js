@@ -3,14 +3,14 @@ export const authenticateUser = (state=[], action) => {
       case 'AUTHENTICATE_USER':
         return {
             ...state,
-            status: true,
+            isUserAuthenticated: true,
             authenticationSuccess: action.authenticationSuccess
         }
         case 'BAD_CREDENTIALS':
         return {
             ...state,
-            status: false,
-            authenticationFail: action.authenticationFail
+            isUserAuthenticated: false,
+            msg: action.authenticationFail
         }
         default:
         return {
@@ -25,7 +25,7 @@ export const bindLoginInputs = (state=[], action) => {
       case 'BIND_USERNAME':
         return {
             ...state,
-            username: action.text
+            email: action.text
         }
         case 'BIND_PASSWORD':
         return {

@@ -35,11 +35,20 @@ class Notification extends Component {
 
     render() {
         this.removeHiddenClass(this)
+        // if(this.props.authErrorMsg!='undefined'){
+        //     return(
+        //     <div className={`alert ${this.notificationTypes[this.props.type]}`} ref={this.refValue}>{this.props.authErrorMsg}
+        //         {this.props.enableCloseIcon ? <b className="close-icon" onClick={this.closeMessage.bind(this)}>x</b> : ''}
+        //     </div>
+        //     )
+        // }
+        // else{
         return (
-            <div className={`alert ${this.notificationTypes[this.props.type]}`} ref={this.refValue}>{this.props.message}
+            <div className={`alert ${this.notificationTypes[this.props.type]}`} ref={this.refValue}>{this.props.message} 
                 {this.props.enableCloseIcon ? <b className="close-icon" onClick={this.closeMessage.bind(this)}>x</b> : ''}
             </div>
         )
+    //}
     }
 
     componentDidUpdate() {

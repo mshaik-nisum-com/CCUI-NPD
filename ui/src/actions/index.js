@@ -19,4 +19,8 @@
     type: 'VALIDATION_MSG',
     text
   })
+  export const eraseMsg = (text) => ({
+    type: 'BAD_CREDENTIALS',
+    authenticationFail:text
+  })
 

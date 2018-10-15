@@ -14,7 +14,7 @@ class Markets extends Component {
     }
     render() {
         return (
-            <Select options={this.props.marketList} />
+            <Select options={this.props.marketList} onChangeMarket={this.props.onChangeMarket}/>
         );
     }
 }

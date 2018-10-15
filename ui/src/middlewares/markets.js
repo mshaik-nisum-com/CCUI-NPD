@@ -3,7 +3,7 @@ import Constants from '../components/common/Constants'
 
 export const getAllMarkets = () => {
   return function (dispatch) {
-    const req = axios.get('http://localhost:3000/markets/marketList');
+    const req = axios.get('http://localhost:4000/markets/marketList');
     req.then((response) => {
       dispatch({
         type: Constants.MARKETS_RECIEVED,
