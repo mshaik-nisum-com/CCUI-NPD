@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 
 class Select extends Component {
+    constructor(props) {
+        super(props);
+    }
+    componentWillMount() {
+        this.props.fetchData();
+    }
     render() {
         let list
         let listOfItems
@@ -21,7 +27,7 @@ class Select extends Component {
             <div>
                 <label className={`form-label ${this.props.noLabel ? this.props.noLabel : ''}`} >{this.props.labelText}</label>
                 <select className="form-control">
-                    <option>Select Market</option>
+                    <option>-- Select --</option>
                     {listOfItems}
                 </select>
             </div>
