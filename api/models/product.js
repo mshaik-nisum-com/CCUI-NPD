@@ -7,8 +7,7 @@ var productSchema = new mongoose.Schema(
     size: { type: Number },
     color: { type: String},
     marketCode: { type: Number },
-    brandCode: { type: String },
-    sku: {type : String}
+    brandCode: { type: String }
   },
   {
     timeStamp: true
