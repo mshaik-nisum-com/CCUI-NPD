@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-var component_role_mappingSchema = new mongoose.Schema({
+var componentRoleMappingSchema = new mongoose.Schema({
   roleId: { type: Number },
   componentId: { type: Number },
   componentName: { type: String, required : false },
@@ -11,4 +11,4 @@ var component_role_mappingSchema = new mongoose.Schema({
   isDisabled:{type:Boolean}
 });
 
-module.exports = mongoose.model("Componentrolemap", component_role_mappingSchema);
+module.exports = mongoose.model("Componentrolemap", componentRoleMappingSchema);

@@ -58,8 +58,6 @@ module.exports = {
                         components: []
                     };
                     getComponentsMap(request, response, results);
-
-
                 } else {
                     response.json({
                         errMsg: "InCorrect Password"
@@ -82,7 +80,6 @@ module.exports = {
 };
 
 const getComponentsMap = function (request, response, results) {
-
     results.components = [];
     Role.findOne({"roleId": results.roleId}).then(roleData => {
         var idOfRole = roleData.roleId;
@@ -93,8 +90,6 @@ const getComponentsMap = function (request, response, results) {
             return results;
         }).then(function (results) {
             Component.find().then(function (componentsData) {
-                /*  return componentData;
-              }).then(function (componentsData) {*/
                 var componentsMap = {};
                 for (let j = 0; j < componentsData.length; j++) {
                     var componentKey = componentsData[j].componentId;
