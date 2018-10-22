@@ -2,7 +2,7 @@ var User = require("../models/user");
 var Component = require("../models/component");
 var ComponentMap = require("../models/componentrolemapping");
 var Role = require("../models/role");
-var componentDao = require("../dao/componentsDao")
+
 var jwt = require("jsonwebtoken");
 var Cryptr = new require('cryptr');
 var cryptr = new Cryptr(process.env.CRYPTR_KEY);
@@ -87,8 +87,7 @@ const getComponentsMap = function (request, response, results) {
             return results;
         }).then(function (results) {
             Component.find().then(function (componentsData) {
-              /*  return componentData;
-            }).then(function (componentsData) {*/
+            
                 var componentsMap = {};
                 for (let j = 0; j < componentsData.length; j++) {
                     var componentKey = componentsData[j].componentId;
