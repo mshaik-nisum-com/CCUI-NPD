@@ -2,29 +2,38 @@ var User = require("../models/user");
 var Component = require("../models/component");
 var ComponentMap = require("../models/componentrolemapping");
 var Role = require("../models/role");
-var componentDao = require("../dao/componentsDao")
 var jwt = require("jsonwebtoken");
 var Cryptr = new require('cryptr');
 var cryptr = new Cryptr(process.env.CRYPTR_KEY);
 
 module.exports = {
 
-    register:function(request, response) {
+    register: function (request, response) {
         var name = request.body.name;
         var email = request.body.email;
         var password = cryptr.encrypt(request.body.password);
+        var roleId = request.body.roleId;
         var user = new User({
-        name , email, password
-        })
-        user.save().then(function (user) {
-        response.json({
-        name : user.name,
-        email : user.email
-        })
-        }).catch(function (error) {
-        response.status(400).json(error);
-        })
-        },
+            name, email, password, roleId
+        });
+
+        User.findOne({email}).then(function (data) {
+            if (data) {
+                response.status(400).json({"errMsg": "Email Already Exists"});
+
+            } else {
+                user.save().then(function (user) {
+                    response.json({
+                        name: user.name,
+                        email: user.email
+                    })
+                }).catch(function (error) {
+                    response.status(400).json(error);
+                })
+            }
+
+        });
+    },
     login: function (request, response) {
         var email = request.body.email;
         var password = request.body.password;
@@ -40,7 +49,14 @@ module.exports = {
                     request.session.isExist = true;
                     request.session.email = user.email;
 
-                     results = {"roleId":user.roleId, name: user.name, roleName: "", email: user.email, token, components: []};
+                    results = {
+                        "roleId": user.roleId,
+                        name: user.name,
+                        roleName: "",
+                        email: user.email,
+                        token,
+                        components: []
+                    };
                     getComponentsMap(request, response, results);
 
 
@@ -53,26 +69,16 @@ module.exports = {
                 response.status(400).json({errMsg: "Invalid Credentials"});
             }
             return results;
-
         });
     },
-
-
-    getAuthorities: function (request, response) {
-
+ getAuthorities: function (request, response) {
         getComponentsMap(request, response, request.body);
-
-
     },
-
-
-    logout: function (request, response) {
+ logout: function (request, response) {
         response.json({
             message: "User Logout Successfully"
         });
     }
-
-
 };
 
 const getComponentsMap = function (request, response, results) {
@@ -87,8 +93,8 @@ const getComponentsMap = function (request, response, results) {
             return results;
         }).then(function (results) {
             Component.find().then(function (componentsData) {
-              /*  return componentData;
-            }).then(function (componentsData) {*/
+                /*  return componentData;
+              }).then(function (componentsData) {*/
                 var componentsMap = {};
                 for (let j = 0; j < componentsData.length; j++) {
                     var componentKey = componentsData[j].componentId;
@@ -98,8 +104,8 @@ const getComponentsMap = function (request, response, results) {
                     results.componentInfo[k].componentName = componentsMap[results.componentInfo[k].componentId];
 
                     componentObj = {
-                        "componentId" : results.componentInfo[k].componentId,
-                        "componentName" : results.componentInfo[k].componentName,
+                        "componentId": results.componentInfo[k].componentId,
+                        "componentName": results.componentInfo[k].componentName,
                         "isShow": results.componentInfo[k].isShow,
                         "isHide": results.componentInfo[k].isHide,
                         "isEnabled": results.componentInfo[k].isEnabled,
