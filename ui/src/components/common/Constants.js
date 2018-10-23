@@ -1,6 +1,6 @@
 // add all the constants here only
 
-const Constants = {
+export const Constants = {
     type: 'error',
     errorMsg: 'Error message here',
     time: 5000,
@@ -9,5 +9,16 @@ const Constants = {
     ERROR_MARKETS:'ERROR_MARKETS',
     FETCH_MARKETS_URL:'/markets/marketList'
 }
-
-export default Constants
+export const ApiEndpoints={
+    LOGIN_URI:'/auth/login',
+    FETCH_MARKETS_URI:'/markets/marketList'
+}
+export const LoginResponse={
+    ON_LOGIN_SUCCESS: 'AUTHENTICATE_USER',
+    ON_LOGIN_FAIL: 'BAD_CREDENTIALS'
+}
+export const LoginValidationMessages={
+    ON_EMPTY_USERNAME: 'Username should not be empty',
+    ON_EMPTY_PASSWORD: 'Password should not be empty',
+    ON_EMPTY_MARKET:  'Market should not be empty'
+}

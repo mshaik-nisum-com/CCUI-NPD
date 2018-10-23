@@ -40,7 +40,7 @@ class Header extends Component {
                                 <i className="fas fa-user-circle fa-fw"></i>
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                <a href="/" className="dropdown-item" data-toggle="modal" data-target="#logoutModal"><b>{this.props.userInfo.username}</b></a>
+                                <a href="/" className="dropdown-item" data-toggle="modal" data-target="#logoutModal"><b>Jai</b></a>
                                 <a href="/" className="dropdown-item" data-toggle="modal" data-target="#logoutModal">Logout</a>
                             </div>
                         </li>

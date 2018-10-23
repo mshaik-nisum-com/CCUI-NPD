@@ -2,7 +2,7 @@ var User = require("../models/user");
 var Component = require("../models/component");
 var ComponentMap = require("../models/componentrolemapping");
 var Role = require("../models/role");
-var componentDao = require("../dao/componentsDao")
+//var componentDao = require("../dao/componentsDao")
 var jwt = require("jsonwebtoken");
 var Cryptr = new require('cryptr');
 var cryptr = new Cryptr(process.env.CRYPTR_KEY);
@@ -50,7 +50,7 @@ module.exports = {
                     });
                 }
             } else {
-                response.status(400).json({errMsg: "Invalid Credentials"});
+                response.status(401).json({errMsg: "Invalid Credentials"});
             }
             return results;
 

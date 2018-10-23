@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import { BrowserRouter } from 'react-router-dom'
 import logger from 'redux-logger'
 import './index.css';
 import App from './App';
@@ -20,10 +20,10 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
  const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk, logger)))
 
 ReactDOM.render(
+<BrowserRouter>
 <Provider store={store}>
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
+    <Route component={App}/>
 </Provider>
+</BrowserRouter>
 , document.getElementById('root'));
 serviceWorker.unregister();
