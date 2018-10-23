@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom'
+import history from '../../utils/history'
 
 class Header extends Component {
     state = {  }
+    logout(){
+        localStorage.clear();
+        //return  <Redirect to='/'/>
+        //history.push('/')
+        window.location.reload(); 
+        
+    }
+
     render() { 
         return ( 
             <div>
@@ -40,8 +50,8 @@ class Header extends Component {
                                 <i className="fas fa-user-circle fa-fw"></i>
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                <a href="/" className="dropdown-item" data-toggle="modal" data-target="#logoutModal"><b>Jai</b></a>
-                                <a href="/" className="dropdown-item" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                                <a href="/" className="dropdown-item" data-toggle="modal" data-target="#logoutModal"><b>{this.props.userInfo || ""}</b></a>
+                                <a href="/" onClick={this.logout.bind(this)} className="dropdown-item" data-toggle="modal" data-target="#logoutModal">Logout</a>
                             </div>
                         </li>
                     </ul>

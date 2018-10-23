@@ -11,15 +11,17 @@ export const authenticateUserCredintails = (usercredentials,history)=> {
             type: LoginResponse.ON_LOGIN_SUCCESS,
             authenticationSuccess:response.data
           });
+          localStorage.token = response.data.token
+          localStorage.name = response.data.name
           history.push("/home");
         }).catch(error => {
-          if(error.status===401){
+          if(error.status===400){
             console.log(error);
             dispatch({
               type: LoginResponse.ON_LOGIN_FAIL,
               errMsg: error.data.errMsg
             });
-            //history.push("/");
+            history.push("/");
           }
       });
       }
