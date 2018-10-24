@@ -2,6 +2,9 @@ var User = require("../models/user");
 var Component = require("../models/component");
 var ComponentMap = require("../models/componentrolemapping");
 var Role = require("../models/role");
+var Market = require("../models/market");
+var Brand = require("../models/brand");
+
 var jwt = require("jsonwebtoken");
 var Cryptr = new require('cryptr');
 var cryptr = new Cryptr(process.env.CRYPTR_KEY);
@@ -55,16 +58,16 @@ module.exports = {
                         roleName: "",
                         email: user.email,
                         token,
-                        components: []
+                        brands: []
                     };
-                    getComponentsMap(request, response, results);
+                    fetchBrands(request, response, results);
                 } else {
                     response.json({
                         errMsg: "InCorrect Password"
                     });
                 }
             } else {
-                response.status(400).json({errMsg: "Invalid Credentials"});
+                response.status(401).json({errMsg: "Invalid Credentials"});
             }
             return results;
         });
@@ -106,9 +109,7 @@ const getComponentsMap = function (request, response, results) {
                         "isEnabled": results.componentInfo[k].isEnabled,
                         "isDisabled": results.componentInfo[k].isDisabled,
                     }
-
                     results.components.push(componentObj);
-
                 }
                 delete results.roleId;
                 delete results.componentInfo;
@@ -116,4 +117,30 @@ const getComponentsMap = function (request, response, results) {
             });
         });
     });
+};
+
+
+const fetchBrands = function (request, response, results) {
+
+    var query = { marketId: request.body.marketId };
+    Market.find(query)
+      .then(function(marketRes) {
+        if(marketRes.length === 0){
+            response.status(401).json({errMsg: "No Brands Avaialble"});
+        }else{
+            var brandIds = marketRes[0].brands;
+            Brand.find({ brandCode: { $in: brandIds } }).then(function(data) {
+                if(data.length === 0){
+                    response.status(401).json({errMsg: "No Brands Avaialble"});
+                }else{
+                    results.brands = data;
+                    response.json(results);
+                }
+    
+            });
+        }
+      })
+      .catch(error => {
+        response.status(400).json(error);
+      });
 };
