@@ -5,7 +5,6 @@ module.exports = {
   USERROUTER: "./routes/users",
   MARKETROUTER: "./routes/markets",
   AUTHROUTER:"./routes/auth",
-  PRODUCTROUTER : "./routes/products",
 
   //Path constants
   AUTHPATH:"/auth",
@@ -13,6 +12,5 @@ module.exports = {
 
   LOGS: "/ccui-npd.log",
   MARKETS: "/markets",
-  DATASOURCE: "./dataSource/dataSource",
-  PRODUCTS:"/products"
+  DATASOURCE: "./dataSource/dataSource"
 };

@@ -16,7 +16,6 @@ var indexRouter = require(constant.INDEXROUTER);
 var usersRouter = require(constant.USERROUTER);
 var marketRouter = require(constant.MARKETROUTER);
 var authRouter = require(constant.AUTHROUTER);
-var productRouter = require(constant.PRODUCTROUTER);
 
 var app = express();
 
@@ -49,9 +48,8 @@ app.use(cors());
 app.use(authMiddleware);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use(constant.MARKETS, marketRouter); 
+app.use(constant.MARKETS, marketRouter);
 app.use(constant.AUTHPATH, authRouter);
-app.use(constant.PRODUCTS,productRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

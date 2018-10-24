@@ -4,8 +4,6 @@ import marketsReducer from '../reducers/marketsReducer'
 
 const ccuiApp = combineReducers({
     authenticateUser,
-    bindLoginInputs,
-    validation,
     marketsReducer
 })
 
