@@ -16,8 +16,9 @@ module.exports = {
         var email = request.body.email;
         var password = cryptr.encrypt(request.body.password);
         var roleId = request.body.roleId;
+        var marketId = request.body.marketId;
         var user = new User({
-            name, email, password, roleId
+            name, email, password, roleId, marketId
         });
 
         User.findOne({email}).then(function (data) {
@@ -41,7 +42,7 @@ module.exports = {
         var email = request.body.email;
         var password = request.body.password;
 
-        User.findOne({email}).then(function (user) {
+        User.findOne({"email":email, "marketId":request.body.marketId}).then(function (user) {
             if (user) {
                 var results;
                 if (user.isValidPassword(password)) {
@@ -51,16 +52,15 @@ module.exports = {
                     );
                     request.session.isExist = true;
                     request.session.email = user.email;
-
+                     console.log(user.marketId);
                     results = {
                         "roleId": user.roleId,
                         name: user.name,
-                        roleName: "",
                         email: user.email,
                         token,
-                        brands: []
+                        marketId: user.marketId
                     };
-                    fetchBrands(request, response, results);
+                    response.json(results);
                 } else {
                     response.json({
                         errMsg: "InCorrect Password"
@@ -120,27 +120,3 @@ const getComponentsMap = function (request, response, results) {
 };
 
 
-const fetchBrands = function (request, response, results) {
-
-    var query = { marketId: request.body.marketId };
-    Market.find(query)
-      .then(function(marketRes) {
-        if(marketRes.length === 0){
-            response.status(401).json({errMsg: "No Brands Avaialble"});
-        }else{
-            var brandIds = marketRes[0].brands;
-            Brand.find({ brandCode: { $in: brandIds } }).then(function(data) {
-                if(data.length === 0){
-                    response.status(401).json({errMsg: "No Brands Avaialble"});
-                }else{
-                    results.brands = data;
-                    response.json(results);
-                }
-    
-            });
-        }
-      })
-      .catch(error => {
-        response.status(400).json(error);
-      });
-};
