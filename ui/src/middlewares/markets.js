@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Constants from '../components/common/Constants'
+import {Constants} from '../components/common/Constants'
 
 export const getAllMarkets = () => {
   return function (dispatch) {

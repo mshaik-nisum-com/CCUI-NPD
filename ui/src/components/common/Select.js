@@ -26,7 +26,7 @@ class Select extends Component {
         return (
             <div>
                 <label className={`form-label ${this.props.noLabel ? this.props.noLabel : ''}`} >{this.props.labelText}</label>
-                <select className="form-control">
+                <select className="form-control" onChange={this.props.onChangeHandler}>
                     <option>-- Select --</option>
                     {listOfItems}
                 </select>

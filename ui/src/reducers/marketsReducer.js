@@ -1,4 +1,4 @@
-import Constants from '../components/common/Constants'
+import {Constants} from '../components/common/Constants'
 const marketsReducer = (state = {}, action) => {
   switch (action.type) {
     case Constants.MARKETS_RECIEVED:

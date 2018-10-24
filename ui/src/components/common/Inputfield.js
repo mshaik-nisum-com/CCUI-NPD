@@ -6,7 +6,7 @@ class InputField extends Component {
         return ( 
             <div>
                 <label className={`form-label ${this.props.noLabel ? this.props.noLabel : ''}`} htmlFor={this.props.elId}>{this.props.labelText}</label>
-                <input onChange={this.props.onChangeFunction} id={this.props.elId} type={this.props.inputType} className={`form-control ${this.props.inputStyle}`} />
+                <input onChange={this.props.onChangeHandler} id={this.props.elId} type={this.props.inputType} className={`form-control ${this.props.inputStyle}`} />
             </div>
          );
     }
