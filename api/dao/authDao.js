@@ -52,7 +52,6 @@ module.exports = {
                     );
                     request.session.isExist = true;
                     request.session.email = user.email;
-                     console.log(user.marketId);
                     results = {
                         "roleId": user.roleId,
                         name: user.name,
