@@ -1,10 +1,10 @@
-var marketDao = require("../dao/marketDao");
+var marketService = require("../service/marketService");
 
 module.exports = {
   marketList: (req, res) => {
-    marketDao.marketList(req, res);
+    marketService.marketList(req, res);
   },
   fetchBrands: (req, res) => {
-    marketDao.fetchBrands(req, res);
+    marketService.fetchBrands(req, res);
   }
 };

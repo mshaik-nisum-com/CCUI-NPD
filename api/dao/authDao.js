@@ -2,6 +2,9 @@ var User = require("../models/user");
 var Component = require("../models/component");
 var ComponentMap = require("../models/componentrolemapping");
 var Role = require("../models/role");
+var Market = require("../models/market");
+var Brand = require("../models/brand");
+
 var jwt = require("jsonwebtoken");
 var Cryptr = new require('cryptr');
 var cryptr = new Cryptr(process.env.CRYPTR_KEY);
@@ -13,8 +16,9 @@ module.exports = {
         var email = request.body.email;
         var password = cryptr.encrypt(request.body.password);
         var roleId = request.body.roleId;
+        var marketId = request.body.marketId;
         var user = new User({
-            name, email, password, roleId
+            name, email, password, roleId, marketId
         });
 
         User.findOne({email}).then(function (data) {
@@ -38,7 +42,7 @@ module.exports = {
         var email = request.body.email;
         var password = request.body.password;
 
-        User.findOne({email}).then(function (user) {
+        User.findOne({"email":email, "marketId":request.body.marketId}).then(function (user) {
             if (user) {
                 var results;
                 if (user.isValidPassword(password)) {
@@ -48,23 +52,21 @@ module.exports = {
                     );
                     request.session.isExist = true;
                     request.session.email = user.email;
-
                     results = {
                         "roleId": user.roleId,
                         name: user.name,
-                        roleName: "",
                         email: user.email,
                         token,
-                        components: []
+                        marketId: user.marketId
                     };
-                    getComponentsMap(request, response, results);
+                    response.json(results);
                 } else {
                     response.json({
                         errMsg: "InCorrect Password"
                     });
                 }
             } else {
-                response.status(400).json({errMsg: "Invalid Credentials"});
+                response.status(401).json({errMsg: "Invalid Credentials"});
             }
             return results;
         });
@@ -106,9 +108,7 @@ const getComponentsMap = function (request, response, results) {
                         "isEnabled": results.componentInfo[k].isEnabled,
                         "isDisabled": results.componentInfo[k].isDisabled,
                     }
-
                     results.components.push(componentObj);
-
                 }
                 delete results.roleId;
                 delete results.componentInfo;
@@ -117,3 +117,5 @@ const getComponentsMap = function (request, response, results) {
         });
     });
 };
+
+
