@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import Footer from '../footer'
+import Footer from '../footer';
+import TabsComponent from '../tabs/index';
+import Brands from '../brands'
 
 class Mainbody extends Component {
-    state = {  }
-    render() { 
-        return ( 
-            <div>
-                <div class="container-fluid">
-                    <h1>Home Page</h1>
-
-                    <Footer />
-                </div>
-            </div>
-         );
-    }
+	state = {
+		arr: ['Create an Order', 'Order and Customer Maintenance', 'Alert Management'],
+		arr2: ['Brands', 'Button', 'Button']
+	};
+	render() {
+		return (
+			<div className="container-fluid">
+				<h4>Order</h4>
+				<TabsComponent arr={this.state.arr} arr1={this.state.arr2} />
+				<Footer />
+			</div>
+		);
+	}
 }
- 
+
 export default Mainbody;
