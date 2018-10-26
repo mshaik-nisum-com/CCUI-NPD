@@ -22,3 +22,9 @@ export const LoginValidationMessages={
     ON_EMPTY_PASSWORD: 'Password should not be empty',
     ON_EMPTY_MARKET:  'Market should not be empty'
 }
+
+export const LoginPageLables={
+    USERNAME: 'Username',
+    PASSWORD: 'Password',
+    MARKET:  'Select-Market'
+}

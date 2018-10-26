@@ -7,7 +7,7 @@ import {Constants} from '../common/Constants'
 import Notification from '../common/Notification'
 import {bindUsername,bindPassword,bindMarket,validation } from '../../actions'
 import {authenticateUserCredintails} from '../../middlewares/authenticateUser'
-import {LoginValidationMessages} from '../common/Constants'
+import {LoginValidationMessages,LoginPageLables} from '../common/Constants'
 
 import '../../css/login.css'
 
@@ -17,7 +17,7 @@ constructor(props){
    this.state = {
             email: "",
             password: "",
-            market: "",
+            marketId: "",
       
         errorMsg:{
             validationMsg:"",
@@ -41,7 +41,7 @@ constructor(props){
                 }
             })
             return false;
-        } else if (usercredentials.market === "" || !usercredentials.market) {
+        } else if (usercredentials.marketId === "" || !usercredentials.marketId) {
             this.setState({
                 errorMsg: {
                     validationMsg: LoginValidationMessages.ON_EMPTY_MARKET
@@ -89,7 +89,7 @@ constructor(props){
     
     bindMarket(evt){
        this.setState({
-            market: evt.target.value
+            marketId: evt.target.value
         ,errorMsg:{validationMsg
             : ""}
       })
@@ -106,13 +106,13 @@ constructor(props){
                 <h3 className="text-center">Login</h3>
                 <form >  
                     <div className="form-group">
-                        <InputField inputType="text" inputStyle="" onChangeHandler={this.bindUsername.bind(this)} labelText="Username" elId="username" />
+                        <InputField inputType="text" inputStyle="" onChangeHandler={this.bindUsername.bind(this)} labelText={LoginPageLables.USERNAME} elId="username" />
                     </div>
                     <div className="form-group">
-                        <InputField inputType="password" inputStyle="" labelText="Password" onChangeHandler={this.bindPassword.bind(this)} elId="password"  />
+                        <InputField inputType="password" inputStyle="" labelText={LoginPageLables.PASSWORD} onChangeHandler={this.bindPassword.bind(this)} elId="password"  />
                     </div>
                     <div className="form-group">
-                        <Markets labelText="Select Country" inputStyle="" onChangeHandler={this.bindMarket.bind(this)} elId="countries"  />
+                        <Markets labelText={LoginPageLables.MARKET} inputStyle="" onChangeHandler={this.bindMarket.bind(this)} elId="countries"  />
                     </div>
                     <Button btnStyle="btn-success btn-block" btnType="button" onClickFunction={this.authenticate.bind(this)} btnText="Submit" />
                 </form>
