@@ -15,7 +15,7 @@ class Select extends Component {
             list = this.props.options;
             listOfItems = list.map((item) => {
                 return (
-                    <option key={item.key}>{item.value}</option>
+                    <option key={item.key} value={item.key}>{item.value}</option>
                 )
             })
         } else {

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {ApiEndpoints, LoginResponse} from '../components/common/Constants'
-import history from '../utils/history'
 
 export const authenticateUserCredintails = (usercredentials,history)=> {
       return function (dispatch){
@@ -13,9 +12,10 @@ export const authenticateUserCredintails = (usercredentials,history)=> {
           });
           localStorage.token = response.data.token
           localStorage.name = response.data.name
+          localStorage.marketId = response.data.marketId
           history.push("/home");
         }).catch(error => {
-          if(error.status===400){
+          if(error.status===401){
             console.log(error);
             dispatch({
               type: LoginResponse.ON_LOGIN_FAIL,
