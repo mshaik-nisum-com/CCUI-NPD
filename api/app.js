@@ -7,6 +7,17 @@ var fs = require("fs");
 require("dotenv").config();
 var logger = require("morgan");
 var cors = require("cors");
+var mongoose = require('mongoose');
+
+// mongoose.connect('mongodb://localhost:27017/taskManager',{
+//   useNewUrlParser: true,
+//   autoIndex: false
+// },()=>{
+//   console.log("DB Connected");
+// });
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
 var constant = require("./constants/constants");
 require(constant.DATASOURCE);
@@ -17,6 +28,7 @@ var usersRouter = require(constant.USERROUTER);
 var marketRouter = require(constant.MARKETROUTER);
 var authRouter = require(constant.AUTHROUTER);
 var productRouter = require(constant.PRODUCTROUTER);
+var orderNumGeneratorRouter= require(constant.ORDERNUMGENERATORROUTER);
 
 var app = express();
 
@@ -49,9 +61,12 @@ app.use(cors());
 app.use(authMiddleware);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+
 app.use(constant.MARKETS, marketRouter); 
 app.use(constant.AUTHPATH, authRouter);
-app.use(constant.PRODUCTS,productRouter)
+app.use(constant.PRODUCTS,productRouter);
+app.use(constant.GENERATEORDERNUM, orderNumGeneratorRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -64,9 +79,10 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
+  console.log(res);
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.render("error",{state: req.session.state});
 });
 
 module.exports = app;

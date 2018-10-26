@@ -6,6 +6,7 @@ module.exports = {
   MARKETROUTER: "./routes/markets",
   AUTHROUTER:"./routes/auth",
   PRODUCTROUTER : "./routes/products",
+  ORDERNUMGENERATORROUTER: "./routes/orderNumGenerator",
 
   //Path constants
   AUTHPATH:"/auth",
@@ -13,6 +14,7 @@ module.exports = {
 
   LOGS: "/ccui-npd.log",
   MARKETS: "/markets",
+  GENERATEORDERNUM:"/generateOrderNum",
   DATASOURCE: "./dataSource/dataSource",
   PRODUCTS:"/products"
 };
