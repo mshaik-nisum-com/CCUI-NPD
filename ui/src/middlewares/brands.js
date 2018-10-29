@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Constants } from '../components/common/Constants'
-
+import { brandsResponse, brandsErrorResponse } from '../actions/brandAction';
 
 export const getBrandsFromCountryId = () => {
 	return function (dispatch) {
@@ -9,15 +9,9 @@ export const getBrandsFromCountryId = () => {
 			headers: { Authorization: "Bearer " + AUTH_TOKEN }
 		});
 		req.then((response) => {
-			dispatch({
-				type: 'BRANDS_RESPONSE',
-				payload: response.data.data
-			})
+			dispatch(brandsResponse(response))
 		}).catch((error) => {
-			// dispatch({
-			//   type: Constants.ERROR_MARKETS,
-			//   error: error
-			// })
+			dispatch(brandsErrorResponse(error))
 		})
 	}
 }

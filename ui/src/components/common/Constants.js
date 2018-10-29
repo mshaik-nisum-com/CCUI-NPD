@@ -7,6 +7,8 @@ export const Constants = {
     enable: true,
     MARKETS_RECIEVED: 'MARKETS_RECIEVED',
     ERROR_MARKETS: 'ERROR_MARKETS',
+    BRANDS_RESPONSE: 'BRANDS_RESPONSE',
+    ERROR_BRANDS: 'ERROR_BRANDS',
     FETCH_MARKETS_URL: '/markets/marketList',
     FETCH_BRANDS_URL: '/markets/fetchBrands/1'
 }
