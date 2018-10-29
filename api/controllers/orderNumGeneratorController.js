@@ -15,6 +15,10 @@ module.exports = {
                 var errMsg= resultObj.data;
                 res.status(resultObj.status).send({errMsg});
                 break;
+
+                default:
+                var errMsg= 'No data found.';
+                res.status(404).send(errMsg);
             }
         }catch(err){
             console.log(err);

@@ -7,14 +7,6 @@ var fs = require("fs");
 require("dotenv").config();
 var logger = require("morgan");
 var cors = require("cors");
-var mongoose = require('mongoose');
-
-// mongoose.connect('mongodb://localhost:27017/taskManager',{
-//   useNewUrlParser: true,
-//   autoIndex: false
-// },()=>{
-//   console.log("DB Connected");
-// });
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -79,10 +71,9 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  console.log(res);
   // render the error page
   res.status(err.status || 500);
-  res.render("error",{state: req.session.state});
+  res.render("error");
 });
 
 module.exports = app;
