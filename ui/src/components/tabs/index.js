@@ -1,8 +1,8 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import React, { Component } from 'react';
 import 'react-tabs/style/react-tabs.css';
-import Brands from '../brands'
-import Button from '../common/Button'
+import BrandsContainer from '../../containers/BrandsContainer';
+import Button from '../common/Button';
 
 export default class TabsComponent extends Component {
 	constructor(props) {
@@ -15,18 +15,22 @@ export default class TabsComponent extends Component {
 
 	render() {
 	return (
-		<Tabs selectedIndex={this.state.activeIndex} onSelect={(activeIndex) => this.setState({ activeIndex })}>
-                <TabList>{this.props.arr.map((tabData, index) => {
+		<Tabs selectedIndex={this.state.activeIndex} onSelect={(activeIndex) => this.setState({ activeIndex })}>		
+                <TabList>{this.props.inputParams.tabNames.map((tabData, index) => {
 				return (
-					<Tab key={index} style={
-						this.state.activeIndex === index ? ({ backgroundColor: '#1bbfe6' }
-						) : ({ backgroundColor: '#c7d7da' })} disabled={index == 0 ? false : true}>{tabData}
-					</Tab>
+					<Tab key={index}  disabled={index == 0 ? false : true}>{tabData}</Tab>
 				);
 			})}
 		</TabList>
-		{this.props.arr1.map((panelData, index) => {
-			const Component = panelData == "Brands" ? Brands:Button;
+		{this.props.inputParams.componentNames.map((panelData, index) => {
+			let Component ;
+			switch(panelData) {
+				case "Brands":
+				Component =  BrandsContainer;
+					break;
+				default:
+				Component =  Button;
+			}
 				return (
 					<TabPanel key={index}>
 						<Component btnText={panelData} />
@@ -37,4 +41,3 @@ export default class TabsComponent extends Component {
 	);
 	}
 }
-

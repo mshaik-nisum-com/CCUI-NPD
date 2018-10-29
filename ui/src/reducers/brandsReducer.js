@@ -1,12 +1,13 @@
+import { Constants } from '../components/common/Constants';
+
 const brandsReducer = (state = {}, action) => {
-    console.log("action", action);
     switch (action.type) {
-        case 'BRANDS_RESPONSE':
+        case Constants.BRANDS_RESPONSE:
             return {
                 ...state,
                 brandsList: action.payload
             }
-        case 'ERROR_BRANDS':
+        case Constants.ERROR_BRANDS:
             return {
                 ...state,
                 error: action.error

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getBrandsFromCountryId } from '../../middlewares/brands';
 
 class Brands extends Component {
 	constructor(props) {
@@ -16,7 +14,6 @@ class Brands extends Component {
 		this.isBrandSelected = true;
 	}
 	render() {
-		console.log("props", this.props);
 		const brandsList = this.props.brandsList ? this.props.brandsList : [];
 		return (
 			<div className="container brands-list">
@@ -24,7 +21,7 @@ class Brands extends Component {
 					return (
 						<div className="card card-orders" key={index} onClick={(e) => this.onBrandSelect(e, brand)}>
 							<div className="card-body">
-								<h6 className="card-title">Card Title</h6>
+								<h6 className="card-title"></h6>
 								<p className="card-text">{brand.brandShortName}</p>
 							</div>
 						</div>
@@ -35,13 +32,6 @@ class Brands extends Component {
 	}
 }
 
+export default Brands;
 
-const mapStateToProps = (state) => {
-	return state.brandsReducer
-};
 
-const mapDispatchToProps = {
-	fetchBrands: getBrandsFromCountryId
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Brands);

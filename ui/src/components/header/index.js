@@ -10,13 +10,13 @@ class Header extends Component {
         //history.push('/')
         window.location.reload();
 
-    } 
+    }
 
     render() {
         return (
             <div>
                 <nav className="navbar navbar-expand navbar-dark bg-dark static-top">
-                    <a className="navbar-brand mr-1">Interrnal App</a>
+                    <a className="navbar-brand mr-1">Call Center App</a>
                     {/* <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
                     <i class="fas fa-bars"></i>
                 </button> */}
