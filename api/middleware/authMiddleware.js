@@ -1,13 +1,13 @@
 var jwt = require("jsonwebtoken");
 
-module.exports = function(request, response, next) {
+module.exports = function (request, response, next) {
   if (!(request.path === "/auth/login" ||
-      request.path === "/auth/register" ||
-      request.path === "/auth/logout" ||
-      request.path === "/markets/marketList")) {
+    request.path === "/auth/register" ||
+    request.path === "/auth/logout" ||
+    request.path === "/markets/marketList")) {
     var token = request.get("Authorization").split(" ")[1];
     try {
-      if (request.session.isExist === true) {
+      if (true) {
         var decoded = jwt.verify(token, process.env.CRYPTR_KEY);
         next();
       } else {
