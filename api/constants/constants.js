@@ -16,5 +16,12 @@ module.exports = {
   MARKETS: "/markets",
   GENERATEORDERNUM:"/generateOrderNum",
   DATASOURCE: "./dataSource/dataSource",
-  PRODUCTS:"/products"
+  PRODUCTS:"/products",
+
+  MarketCodes : {
+    1: '01234GFEDCBA56789ABCDEFG',
+    2: '56789HIJKLM01234MLKJIH',
+    3: '89123UVWXYZZYXWVU45670',
+    4: '12389NOPQRSTTSRQPON45670'
+  }
 };

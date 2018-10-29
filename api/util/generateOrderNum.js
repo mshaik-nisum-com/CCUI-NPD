@@ -1,4 +1,4 @@
-var marketCodes=require("../constants/marketCodes");
+var marketCodes=require("../constants/constants");
 
 module.exports= {
     generateOrderNum: function(market, brand, orderListArr) {
@@ -11,8 +11,7 @@ module.exports= {
                 orderIdArr.push(element.orderID);
             });
 
-            console.log(marketCodes[market]);
-            key += marketCodes[market];
+            key += marketCodes.MarketCodes[market];
 
             while(condition){
                 
