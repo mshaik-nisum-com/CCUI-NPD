@@ -38,7 +38,7 @@ module.exports = {
         });
     },
 
-    oauthcallback: async function (request, response) {
+    oauthCallBack: async function (request, response) {
         try {
             const qs = querystring.parse(url.parse(request.url).query);
             const { tokens } = await oauth2Client.getToken(qs.code);
