@@ -52,7 +52,7 @@ module.exports = {
                     userinfo = JSON.parse(userinfo);
 
                     //Writing oauth token and user details to file
-                    oauthUtility.writeGoogleResToFile(userinfo);
+                    //oauthUtility.writeGoogleResToFile(userinfo);
 
                     //Remove google details from result.
                     oauthUtility.removeGoogleDataFromRes(userinfo);
