@@ -21,6 +21,7 @@ var marketRouter = require(constant.MARKETROUTER);
 var authRouter = require(constant.AUTHROUTER);
 var productRouter = require(constant.PRODUCTROUTER);
 var orderNumGeneratorRouter= require(constant.ORDERNUMGENERATORROUTER);
+var oauthRouter = require(constant.OAUTHROUTER);
 
 var app = express();
 
@@ -58,7 +59,7 @@ app.use(constant.MARKETS, marketRouter);
 app.use(constant.AUTHPATH, authRouter);
 app.use(constant.PRODUCTS,productRouter);
 app.use(constant.GENERATEORDERNUM, orderNumGeneratorRouter);
-
+app.use(constant.OAUTHPATH,oauthRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
