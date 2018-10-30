@@ -5,8 +5,8 @@ module.exports = {
         oauthService.getOauthLoginUrl(response);
     },
 
-    oauthcallback: function (request, response) {
-        oauthService.oauthcallback(request, response);
+    oauthCallBack: function (request, response) {
+        oauthService.oauthCallBack(request, response);
     },
 
     logout: function (request, response) {
