@@ -7,9 +7,11 @@ module.exports = {
   AUTHROUTER:"./routes/auth",
   PRODUCTROUTER : "./routes/products",
   ORDERNUMGENERATORROUTER: "./routes/orderNumGenerator",
+  OAUTHROUTER:"./routes/oauth",
 
   //Path constants
-  AUTHPATH:"/auth",
+  AUTHPATH: "/auth",
+  OAUTHPATH:"/oauth",
   MIDDLEWAREPATH:"./middleware/authMiddleware",
 
   LOGS: "/ccui-npd.log",
@@ -23,5 +25,14 @@ module.exports = {
     2: '56789HIJKLM01234MLKJIH',
     3: '89123UVWXYZZYXWVU45670',
     4: '12389NOPQRSTTSRQPON45670'
-  }
+    },
+
+    AUTHPATHS: [
+        "/auth/login",
+        "/auth/register",
+        "/auth/logout",
+        "/markets/marketList",
+        "/oauth/getOAuthLoginUrl",
+        "/oauth/oauthcallback"
+    ]
 };
