@@ -12,6 +12,7 @@ class Brands extends Component {
 	onBrandSelect = (e, brand) => {
 		e.preventDefault();
 		this.isBrandSelected = true;
+		this.props.orderNumberGenerator(brand);
 	}
 	render() {
 		const brandsList = this.props.brandsList ? this.props.brandsList : [];

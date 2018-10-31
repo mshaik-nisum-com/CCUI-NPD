@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Header from '../header'
-import Sidebar from '../sidebar'
+import SideNav from '../sideNav'
 import Main from '../main'
+import BrandNav from '../brandNav'
 import history from '../../utils/history'
+import '../../css/home.css'
 
 class Home extends Component {
     state = {}
@@ -31,8 +33,9 @@ class Home extends Component {
             return (
                 <div>
                     <Header userInfo={localStorage.name ? localStorage.name : ''} />
+                    {this.props.orderDetails.orderNumber ? <BrandNav orderDetails = {this.props.orderDetails ? this.props.orderDetails : ''} /> : '' }
                     <div id="wrapper">
-                        <Sidebar />
+                        <SideNav />
                         <div id="content-wrapper">
                             <Main />
                         </div>
@@ -47,7 +50,8 @@ class Home extends Component {
 const mapStateToProps = (state) => {
     return {
         isUserAuthenticated: state.authenticateUser.isUserAuthenticated || false,
-        authenticationSuccess: state.authenticateUser.authenticationSuccess
+        authenticationSuccess: state.authenticateUser.authenticationSuccess,
+        orderDetails : state.orderNumberReducer
     }
 }
 export default connect(mapStateToProps)(Home)
