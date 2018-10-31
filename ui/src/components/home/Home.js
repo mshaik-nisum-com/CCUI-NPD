@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Header from '../header'
-import Sidebar from '../sidebar'
+import SideNav from '../sideNav'
 import Main from '../main'
 import BrandNav from '../brandNav'
 import history from '../../utils/history'
@@ -35,7 +35,7 @@ class Home extends Component {
                     <Header userInfo={localStorage.name ? localStorage.name : ''} />
                     {this.props.orderDetails.orderNumber ? <BrandNav orderDetails = {this.props.orderDetails ? this.props.orderDetails : ''} /> : '' }
                     <div id="wrapper">
-                        <Sidebar />
+                        <SideNav />
                         <div id="content-wrapper">
                             <Main />
                         </div>
