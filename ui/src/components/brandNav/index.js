@@ -5,10 +5,10 @@ export default class BrandNav extends Component {
     return (
       <div>
             <nav className="navbar navbar-expand navbar-dark  static-top navHeader">
-               <img src="../../images/homeIcon"/> 
-               <div className="order-details" ><b>Brand</b>  : GOL</div>
-               <div className="order-details" ><b>orderNumber</b>  : YH845DFH</div>
-               <div className="order-details" ><b>orderDate</b>  : 10/12/2018</div>
+               <img className="home-Icon" src="https://png.icons8.com/metro/50/000000/home.png"/>
+               <div className="order-details" ><b>Brand</b>:  {this.props.orderDetails.brandName}</div>
+               <div className="order-details" ><b>orderNumber</b>: {this.props.orderDetails.orderNumber}</div>
+               <div className="order-details" ><b>orderDate</b>  : {this.props.orderDetails.createdDate}</div>
             </nav>
       </div>
     )
