@@ -21,9 +21,9 @@ module.exports = {
             name, email, password, roleId, marketId
         });
 
-        User.findOne({email}).then(function (data) {
+        User.findOne({ email }).then(function (data) {
             if (data) {
-                response.status(400).json({"errMsg": "Email Already Exists"});
+                response.status(400).json({ "errMsg": "Email Already Exists" });
 
             } else {
                 user.save().then(function (user) {
@@ -42,52 +42,75 @@ module.exports = {
         var email = request.body.email;
         var password = request.body.password;
 
-        User.findOne({"email":email, "marketId":request.body.marketId}).then(function (user) {
+        User.findOne({ "email": email, "marketId": request.body.marketId }).then(function (user) {
             if (user) {
                 var results;
                 if (user.isValidPassword(password)) {
                     var token = jwt.sign(
-                        {name: user.name, email: user.email},
+                        { name: user.name, email: user.email },
                         process.env.CRYPTR_KEY
                     );
-                    request.session.isExist = true;
-                    request.session.email = user.email;
-                    results = {
-                        "roleId": user.roleId,
-                        name: user.name,
-                        email: user.email,
-                        token,
-                        marketId: user.marketId
-                    };
-                    response.json(results);
+       
+                    User.updateOne({ "email": email }, { isValid: true }, { new: true }).then(function (data) {
+                        results = {
+                            "roleId": user.roleId,
+                            name: user.name,
+                            email: user.email,
+                            token,
+                            marketId: user.marketId
+                        };
+                        response.json(results);
+                    }).catch(function (error) {
+                        console.log(error);
+                    })
+
+
+
                 } else {
                     response.json({
                         errMsg: "InCorrect Password"
                     });
                 }
             } else {
-                response.status(401).json({errMsg: "Invalid Credentials"});
+                response.status(401).json({ errMsg: "Invalid Credentials" });
             }
             return results;
         });
     },
- getAuthorities: function (request, response) {
-        getComponentsMap(request, response, request.body);
+
+    getUserValidToken: async function(email) {
+        console.log("Getting user Token ");
+        User.findOne({ "email": email}).then(function (user) {
+            console.log("User Obj in Then ", user);
+            return user;
+        }).catch(function(error){
+            console.log("Error", error);
+        });
     },
- logout: function (request, response) {
+
+    getAuthorities: function (request, response) {
+        console.log("In Get Authorities ");
+
+         getComponentsMap(request, response);
+    },
+
+
+    logout: function (request, response) {
         response.json({
             message: "User Logout Successfully"
         });
     }
 };
 
-const getComponentsMap = function (request, response, results) {
-    results.components = [];
-    Role.findOne({"roleId": results.roleId}).then(roleData => {
-        var idOfRole = roleData.roleId;
+const getComponentsMap = function (request, response) {
+    var results = {"components" : [], "roleName" : "h", "roleId" : request.body.roldId};
+
+    Role.findOne({ "roleId": request.body.roleId }).then(roleData => {
+        var idOfRole = request.body.roleId;
+        console.log(results.roleName," ",roleData)
         results.roleName = roleData.roleName;
         var componentsList;
-        ComponentMap.find({"roleId": idOfRole}).then(componentRowMapData => {
+        ComponentMap.find({ "roleId": idOfRole }).then(componentRowMapData => {
             results['componentInfo'] = componentRowMapData;
             return results;
         }).then(function (results) {

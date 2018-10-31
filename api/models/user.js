@@ -8,7 +8,8 @@ var userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     roleId:{type:Number,required:true},
-    marketId:{type:Number, required:true}
+    marketId:{type:Number, required:true},
+    isValid:{type:Boolean, required:true}
   },
   {
     timeStamp: true

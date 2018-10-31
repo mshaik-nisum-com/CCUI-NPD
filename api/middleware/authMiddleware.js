@@ -1,4 +1,6 @@
 var jwt = require("jsonwebtoken");
+var User = require("../models/user");
+
 
 module.exports = function (request, response, next) {
   if (!(request.path === "/auth/login" ||
@@ -6,15 +8,22 @@ module.exports = function (request, response, next) {
     request.path === "/auth/logout" ||
     request.path === "/markets/marketList")) {
     var token = request.get("Authorization").split(" ")[1];
+
     try {
-      if (true) {
-        var decoded = jwt.verify(token, process.env.CRYPTR_KEY);
-        next();
-      } else {
-        response.status(400).json({
-          errMsg: "Invalid Token"
-        });
-      }
+      var decoded = jwt.verify(token, process.env.CRYPTR_KEY);
+      var email = decoded.email;
+      User.findOne({ "email": email }).then(function (user) {
+        if (user.isValid === true) {
+          next();
+        } else {
+          response.status(400).json({
+            errMsg: "Invalid Token"
+          });
+        }
+
+      }).catch(function (error) {
+        response.json(error);
+      });
     } catch (e) {
       response.status(400).json({
         errMsg: "Invalid Request"
