@@ -26,7 +26,6 @@ constructor(props){
     };
 }
     validate(usercredentials){
-        debugger
         if (usercredentials.email === "" || !usercredentials.email) {
             this.setState({
                 errorMsg: {
@@ -57,7 +56,6 @@ constructor(props){
         e.preventDefault();
         var usercredentials= this.state;
         delete usercredentials.errorMsg;
-        debugger
         if (this.validate(usercredentials)) {
             this.props.dispatch(authenticateUserCredintails(usercredentials,this.props.history));
             this.setState({

@@ -3,7 +3,6 @@ import { ApiEndpoints, LoginResponse } from '../components/common/Constants'
 
 export const authenticateUserCredintails = (usercredentials, history) => {
   return function (dispatch) {
-    debugger
     const request = axios.post(`${process.env.REACT_APP_SERVICE_API_URL}${ApiEndpoints.LOGIN_URI}`, usercredentials);
     request.then((response) => {
       dispatch({
