@@ -48,7 +48,6 @@ class Home extends Component {
 
 
 const mapStateToProps = (state) => {
-    console.log("vachinda",state)
     return {
         isUserAuthenticated: state.authenticateUser.isUserAuthenticated || false,
         authenticationSuccess: state.authenticateUser.authenticationSuccess,
