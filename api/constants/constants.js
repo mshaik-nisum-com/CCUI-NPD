@@ -30,7 +30,6 @@ module.exports = {
     AUTHPATHS: [
         "/auth/login",
         "/auth/register",
-        "/auth/logout",
         "/markets/marketList",
         "/oauth/getOAuthLoginUrl",
         "/oauth/oauthcallback"
