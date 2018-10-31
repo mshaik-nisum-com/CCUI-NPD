@@ -18,7 +18,7 @@ constructor(props){
             email: "",
             password: "",
             marketId: "",
-      
+
         errorMsg:{
             validationMsg:"",
             errorResponse: ''
@@ -61,21 +61,21 @@ constructor(props){
             this.setState({
                 errorMsg:{validationMsg
                 : "",errorResponse: this.props.validationMsg || ""},
-               
+
               })
         }
 
     }
-    
+
     bindUsername(evt){
       this.setState({
-            email: evt.target.value,     
+            email: evt.target.value,
         errorMsg:{validationMsg
             : ""}
       })
 
     }
-    
+
     bindPassword(evt){
        this.setState({
             password: evt.target.value
@@ -84,7 +84,7 @@ constructor(props){
       })
 
     }
-    
+
     bindMarket(evt){
        this.setState({
             marketId: evt.target.value
@@ -100,9 +100,9 @@ constructor(props){
             <div className="login">
 
                 {this.state.errorMsg.errorResponse || this.state.errorMsg.validationMsg ? <Notification type={Constants.type} enableCloseIcon={Constants.enable} message={this.state.errorMsg.errorResponse || this.state.errorMsg.validationMsg } /> : ''}
-                
+
                 <h3 className="text-center">Login</h3>
-                <form >  
+                <form >
                     <div className="form-group">
                         <InputField inputType="text" inputStyle="" onChangeHandler={this.bindUsername.bind(this)} labelText={LoginPageLables.USERNAME} elId="username" />
                     </div>

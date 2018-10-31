@@ -5,9 +5,9 @@ import { getOrderNumber } from '../middlewares/orderNumber'
 
 const mapStateToProps = state => state.brandsReducer
 
-const mapDispatchToProps = {
-    fetchBrands: getBrandsFromCountryId,
+const mapDispatchToProps =  (dispatch) => ({
+    fetchBrands:(id) => dispatch(getBrandsFromCountryId(id)),
     orderNumberGenerator : getOrderNumber
-}
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Brands);
