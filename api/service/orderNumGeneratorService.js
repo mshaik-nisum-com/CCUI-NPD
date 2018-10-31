@@ -1,5 +1,8 @@
+var dateFormat = require('date-format');
+
 var orderNumGeneratorDao= require('../dao/orderNumGeneratorDao');
 var generateOrderNumber= require('../util/generateOrderNum');
+
 
 module.exports={
     generateOrderNumber: async function(req){
@@ -20,16 +23,20 @@ module.exports={
 
         try{
             var result={};
+            var status;
             if((market===undefined)||(brand===undefined)){
-               result.status=400;
-               result.data="market and brand must not be empty.";
+               status=400;
+               result.errMsg="market and brand must not be empty.";
             }else{
                 orderListArr=await orderNumGeneratorDao.generateOrderNumber();
                 uniqueId= generateOrderNumber.generateOrderNum(market, brand, orderListArr);
-                result.status=200;
-               result.data=uniqueId;
+                status=200;
+                result.orderId=uniqueId;
+                result.marketId= market;
+                result.brandName= brand;
+                result.createdDate = dateFormat.asString('dd/MM/yyyy', new Date());
             }
-            return result;
+            return [status,result];
         }catch(err){
             throw err;
         } 
