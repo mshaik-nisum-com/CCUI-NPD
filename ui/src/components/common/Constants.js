@@ -12,7 +12,7 @@ export const Constants = {
     ERROR_ORDER_NUMBER : 'ERROR_ORDER_NUMBER',
     ORDER_NUMBER_RESPONSE : 'ORDER_NUMBER_RESPONSE',
     FETCH_MARKETS_URL: '/markets/marketList',
-    FETCH_BRANDS_URL: '/markets/fetchBrands/1',
+    FETCH_BRANDS_URL: '/markets/fetchBrands/',
     FETCH_ORDER_NUMBER_URL : '/generateOrderNum',
 }
 export const ApiEndpoints = {

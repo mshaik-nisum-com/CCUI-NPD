@@ -14,8 +14,10 @@ const convertMarkets = (state) => {
     return markets;
 }
 const mapStateToProps = (state) => {
+ const marketVal = (state.authenticateUser && state.authenticateUser.authenticationSuccess) ? state.authenticateUser.authenticationSuccess.marketId : ''
     return {
-        options: convertMarkets(state)
+        options: convertMarkets(state),
+        marketVal: marketVal
     }
 }
 const mapDispatchToProps = {

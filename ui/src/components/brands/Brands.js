@@ -6,7 +6,9 @@ class Brands extends Component {
 		this.isBrandSelected = false;
 	}
 	componentDidMount() {
-		this.props.fetchBrands();
+		const marketId=localStorage.getItem('marketId');
+
+		this.props.fetchBrands(marketId);
 	}
 
 	onBrandSelect = (e, brand) => {

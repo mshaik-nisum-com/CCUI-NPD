@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import history from '../../utils/history'
+import Markets from '../../containers/Markets'
+import {LoginPageLables} from '../common/Constants'
+import {getBrandsFromCountryId} from '../../middlewares/brands'
 
 class Header extends Component {
     state = {}
@@ -11,7 +15,15 @@ class Header extends Component {
         window.location.reload();
 
     }
+    bindMarket(evt){
+        this.setState({
+             marketId: evt.target.value
+         ,errorMsg:{validationMsg
+             : ""}
+       })
+       this.props.dispatch(getBrandsFromCountryId(evt.target.value))
 
+     }
     render() {
         return (
             <div>
@@ -23,9 +35,12 @@ class Header extends Component {
                     <div className="ml-auto top-right-nav">
                         <ul className="navbar-nav">
                             <li>
-                                <select className="form-control">
+                                {/* <select className="form-control">
                                     <option>United States</option>
-                                </select>
+                                </select>*/}
+                                 <div className="form-group">
+                        <Markets labelText={LoginPageLables.MARKET} inputStyle="" onChangeHandler={this.bindMarket.bind(this)} elId="countries"  />
+                            </div>
                             </li>
                             <li>
                                 <a href="/">Notepad</a>
@@ -61,5 +76,4 @@ class Header extends Component {
         );
     }
 }
-
-export default Header;
+export default connect()(Header);
