@@ -1,0 +1,16 @@
+.sidebar .summaryInfo{
+    color: rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+  }
+  a.disabled  { 
+  cursor:not-allowed ; 
+  color:rgba(255, 255, 255, 0.5) !important;
+  /* pointer-events: none; */
+  }
+  .promoInfo{
+    height:90px;
+    overflow-y: scroll;
+  }
+  .promoCard{
+    background-color: whitesmoke !important;
+  }

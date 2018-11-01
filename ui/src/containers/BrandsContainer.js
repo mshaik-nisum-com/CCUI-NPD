@@ -7,7 +7,7 @@ const mapStateToProps = state => state.brandsReducer
 
 const mapDispatchToProps =  (dispatch) => ({
     fetchBrands:(id) => dispatch(getBrandsFromCountryId(id)),
-    orderNumberGenerator : getOrderNumber
+    orderNumberGenerator: (brand) => dispatch(getOrderNumber(brand))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Brands);
