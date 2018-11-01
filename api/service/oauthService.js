@@ -62,6 +62,7 @@ module.exports = {
                     if (user) {
                         // Formatting result object and append the token to response
                         var tokenStr = tokenGenerator.generateToken(user.name, user.email);
+                        // Updating user to start session
                         oauthDao.updateUserToStartSession(user);
                         var userDetails = { name: user.name, roleId: user.roleId, emails: email, marketId: user.marketId, token: tokenStr };
                         userinfo = Object.assign(userinfo, userDetails);
