@@ -25,18 +25,6 @@ module.exports = {
       .catch(error => {
         res.status(400).json(error);
       });
-  },
-
-  retrieveUserByEmail: async function(email){
-    var user= undefined;
-    user= await User.findOne({email: email})
-                    .then(function(data){
-                      return data;
-                    })
-                    .catch(function(error){
-                      console.log(error); 
-                    });
-    return user;
   }
 
   // addMarkets: (req, res) => {
