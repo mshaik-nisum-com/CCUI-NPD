@@ -1,5 +1,7 @@
 var Market = require("../models/market");
 var Brand = require("../models/brand");
+var User = require("../models/user");
+
 module.exports = {
   marketList: (req, res) => {
     Market.find()
@@ -23,6 +25,18 @@ module.exports = {
       .catch(error => {
         res.status(400).json(error);
       });
+  },
+
+  retrieveUserByEmail: async function(email){
+    var user= undefined;
+    user= await User.findOne({email: email})
+                    .then(function(data){
+                      return data;
+                    })
+                    .catch(function(error){
+                      console.log(error); 
+                    });
+    return user;
   }
 
   // addMarkets: (req, res) => {

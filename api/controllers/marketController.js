@@ -6,5 +6,8 @@ module.exports = {
   },
   fetchBrands: (req, res) => {
     marketService.fetchBrands(req, res);
+  },
+  validateMarketUser: (req, res) => {
+    marketService.validMarketUser(req, res);
   }
 };
