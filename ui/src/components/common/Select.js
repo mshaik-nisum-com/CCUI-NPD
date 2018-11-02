@@ -14,8 +14,7 @@ class Select extends Component {
         if (this.props.options) {
             list = this.props.options;
             listOfItems = list.map((item) => {
-                debugger
-                return (
+                 return (
                     // <option key={item.key} value={item.key}>{item.value}</option>
                     <option key={item.key} value={item.key} selected={this.props && this.props.marketVal === item.key}>{item.value}</option>
                 )
