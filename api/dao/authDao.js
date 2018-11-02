@@ -50,7 +50,7 @@ module.exports = {
                         { name: user.name, email: user.email },
                         process.env.CRYPTR_KEY
                     );
-                    User.updateOne({ "email": email }, { isValid: true }, { new: true }).then(function (data) {
+                    module.exports.updateUserToStartSession(user).then(function (data) {
                         results = {
                             "roleId": user.roleId,
                             name: user.name,
@@ -60,7 +60,7 @@ module.exports = {
                         };
                         response.json(results);
                     }).catch(function (error) {
-                        console.log(error);
+                        response.status(401).json(error);
                     });
 
                 } else {
@@ -80,6 +80,18 @@ module.exports = {
     logout: function (request, response) {
         response.json({
             message: "User Logout Successfully"
+        });
+    },
+
+    updateUserToStartSession: function (usr) {
+        return new Promise(function (resolve, reject) {
+            User.updateOne({ "email": usr.email }, { isValid: true }, { new: true }).then(function (user) {
+                if (user) {
+                    resolve(user);
+                } else {
+                    reject("Update user failed.");
+                }
+            })
         });
     }
 };

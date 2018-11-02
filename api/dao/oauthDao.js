@@ -1,6 +1,7 @@
 'use strict';
 
 var User = require("../models/user");
+var authDao = require("./authDao");
 
 module.exports = {
     getUserByEmailId: function (email) {
@@ -17,5 +18,9 @@ module.exports = {
                 }
          });
       });
+    },
+
+    updateUserToStartSession: function (user) {
+        authDao.updateUserToStartSession(user);
     }
 }
