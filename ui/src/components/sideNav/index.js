@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import '../../css/sideNav.css';
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemTitle,
+    AccordionItemBody,
+} from 'react-accessible-accordion';
+//import 'react-accessible-accordion/dist/fancyAccordion.css';
+import '../../css/fancyAccordion.css'
+//import 'react-accessible-accordion/dist/minimalAccordion.css';
 
 class SideNav extends Component {
     state = {}
     render() {
         return (
-            <div>
-                <ul className="sidebar navbar-nav">
-                    <li className="nav-item dropdown">
-                        <a href="/" className="nav-link dropdown-toggle" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {/* <i class="fas fa-fw fa-folder"></i> */}
-                            <span>Find Style</span>
-                        </a>
-                        <div className="dropdown-menu" aria-labelledby="pagesDropdown">
+            <div className="sidebar">
+                <Accordion>
+                    <AccordionItem expanded="true">
+                        <AccordionItemTitle>
+                            <span><b>Find Style</b></span>
+                        </AccordionItemTitle>
+                        <AccordionItemBody>
                             <div className="form-group">
                                 <label>Product ID</label>
                                 <input className="form-control" placeholder="Enter ID" />
@@ -24,18 +34,79 @@ class SideNav extends Component {
                                     <option>Old Navy</option>
                                 </select>
                             </div>
-
-                        </div>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/">
-                            {/* <i class="fas fa-fw fa-chart-area"></i> */}
-                            <span>Custom Search</span></a>
-                    </li>
-                </ul>
+                            <a href="#" role="button" className="btn btn-primary btn-sm">Find</a>
+                        </AccordionItemBody>
+                    </AccordionItem>
+                    <AccordionItem>
+                        <AccordionItemTitle>
+                            <span><b>Customer Search</b></span>
+                        </AccordionItemTitle>
+                        <AccordionItemBody>
+                            <div className="form-group">
+                                <label htmlFor="email">Email Id:</label>
+                                <input type="email" className="form-control" id="email" placeholder="Enter Email" />
+                            </div>
+                            <a href="#" role="button" className="btn btn-primary btn-sm">Search</a>
+                        </AccordionItemBody>
+                    </AccordionItem>
+                    <AccordionItem className="disabled">
+                        <AccordionItemTitle>
+                            <span><b>Final Review</b></span>
+                        </AccordionItemTitle>
+                        <AccordionItemBody>
+                            <div>Final Review</div>
+                        </AccordionItemBody>
+                    </AccordionItem>
+                    <AccordionItem className="disabled">
+                        <AccordionItemTitle>
+                            <span><b>Order Details</b></span>
+                        </AccordionItemTitle>
+                        <AccordionItemBody>
+                            <div>Order Details</div>
+                        </AccordionItemBody>
+                    </AccordionItem>
+                </Accordion>
+                <div className="accordionHeading"><b>Promo Messages</b></div>
+                <div className="card promoCard">
+                    <div className="card-body">
+                        <p className="card-text promoInfo">Some quick example text to build on the card and display promoMessages.
+                        Some quick example text to build on the card and display promoMessages.
+                        Some quick example text to build on the card and display promoMessages.
+                        Some quick example text to build on the card and display promoMessages.
+                        Some quick example text to build on the card and display promoMessages.
+                            Some quick example text to build on the card and display promoMessages.</p>
+                    </div>
+                </div>
+                <div className="accordionHeading"><b>Summary Of Charges</b></div>
+                <div className="chargesInfo">
+                    <div className="row">
+                        <div className="col-sm-7">
+                            Merchandise
+    </div>
+                        <div className="col-sm-5">$5
+    </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-sm-7">Shipping
+    </div>
+                        <div className="col-sm-5">$45
+    </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-sm-7">Taxes
+    </div>
+                        <div className="col-sm-5">$123
+    </div>
+                    </div>
+                    <div className="row totalPrice">
+                        <div className="col-sm-7">Grand Total
+    </div>
+                        <div className="col-sm-5">$4567
+    </div>
+                    </div>
+                </div>
             </div>
         );
     }
 }
-
 export default SideNav;
