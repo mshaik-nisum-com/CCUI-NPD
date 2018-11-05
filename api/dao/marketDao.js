@@ -1,5 +1,7 @@
 var Market = require("../models/market");
 var Brand = require("../models/brand");
+var User = require("../models/user");
+
 module.exports = {
   marketList: (req, res) => {
     Market.find()
