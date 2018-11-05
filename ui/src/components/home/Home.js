@@ -33,13 +33,12 @@ class Home extends Component {
             return (
                 <div>
                     <Header userInfo={localStorage.name ? localStorage.name : ''} />
-                    {this.props.orderDetails.orderNumber ? <BrandNav orderDetails = {this.props.orderDetails ? this.props.orderDetails : ''} /> : '' }
-                    <div id="wrapper">
-                        <SideNav />
-                        <div id="content-wrapper">
-                            <Main />
-                        </div>
+                    {/* <div id="wrapper">
+                        <SideNav /> */}
+                    <div id="content-wrapper">
+                        <Main />
                     </div>
+                    {/* </div> */}
                 </div>
             );
         }
@@ -51,7 +50,7 @@ const mapStateToProps = (state) => {
     return {
         isUserAuthenticated: state.authenticateUser.isUserAuthenticated || false,
         authenticationSuccess: state.authenticateUser.authenticationSuccess,
-        orderDetails : state.orderNumberReducer
+        orderDetails: state.orderNumberReducer
     }
 }
 export default connect(mapStateToProps)(Home)

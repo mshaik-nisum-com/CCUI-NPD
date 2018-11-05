@@ -61,7 +61,9 @@ module.exports = {
                     let user = await oauthDao.getUserByEmailId(email);
                     if (user) {
                         // Formatting result object and append the token to response
-                        var tokenStr = tokenGenerator.generateToken(user.name, email);
+                        var tokenStr = tokenGenerator.generateToken(user.name, user.email);
+                        // Updating user to start session
+                        oauthDao.updateUserToStartSession(user);
                         var userDetails = { name: user.name, roleId: user.roleId, emails: email, marketId: user.marketId, token: tokenStr };
                         userinfo = Object.assign(userinfo, userDetails);
 
@@ -70,16 +72,19 @@ module.exports = {
                     }
                 } catch (err) {
                     console.log(err);
-                    throw err;
+                    response.status(401).json(err);
                 }
             }).catch(err => {
-                response.status(400).json({ err });
+                console.log(err);
+                response.status(401).json(err);
            });
 
-        } catch (e) {
-            response.send(e);
+        } catch (err) {
+            console.log(err);
+            response.status(400).send(JSON.stringify(err));
         }
     },
+    
     logout: function (request, response) {
         response.json({
             message: "User Logout Successfully"

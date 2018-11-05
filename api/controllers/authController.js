@@ -14,5 +14,9 @@ module.exports = {
 
     logout: function (request, response) {
         authService.logout(request, response);
-    }
+    },
+
+    validateMarketUser: (req, res) => {
+        authService.validateMarketUser(req, res);
+      }
 };

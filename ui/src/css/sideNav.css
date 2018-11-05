@@ -31,6 +31,7 @@ color: white !important;
 .promoInfo{
     height:90px;
     overflow-y: scroll;
+    text-align: left;
 }
 .promoCard{
     margin:0px 8px 0px 8px;

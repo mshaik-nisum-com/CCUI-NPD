@@ -5,6 +5,7 @@ var Role = require("../models/role");
 var Market = require("../models/market");
 var Brand = require("../models/brand");
 
+
 var jwt = require("jsonwebtoken");
 var Cryptr = new require('cryptr');
 var cryptr = new Cryptr(process.env.CRYPTR_KEY);
@@ -16,10 +17,15 @@ module.exports = {
         var email = request.body.email;
         var password = cryptr.encrypt(request.body.password);
         var roleId = request.body.roleId;
-        var marketId = request.body.marketId;
-        var user = new User({
-            name, email, password, roleId, marketId
+        var marketIds =request.body.marketId;
+        marketIds = marketIds.split(',').map(function(item) {
+            return parseInt(item, 10);
         });
+        var isValid=request.body.isValid;
+        var user = new User({
+            name, email, password, roleId,isValid
+        });
+        user.marketId=marketIds;
 
         User.findOne({ email }).then(function (data) {
             if (data) {
@@ -41,33 +47,40 @@ module.exports = {
     login: function (request, response) {
         var email = request.body.email;
         var password = request.body.password;
+        var marketId =parseInt(request.body.marketId);
 
-        User.findOne({ "email": email, "marketId": request.body.marketId }).then(function (user) {
+        User.findOne({ email }).then(function (user) {
             if (user) {
                 var results;
-                if (user.isValidPassword(password)) {
-                    var token = jwt.sign(
-                        { name: user.name, email: user.email },
-                        process.env.CRYPTR_KEY
-                    );
-                    User.updateOne({ "email": email }, { isValid: true }, { new: true }).then(function (data) {
-                        results = {
-                            "roleId": user.roleId,
-                            name: user.name,
-                            email: user.email,
-                            token,
-                            marketId: user.marketId
-                        };
-                        response.json(results);
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
 
-                } else {
-                    response.json({
-                        errMsg: "InCorrect Password"
-                    });
+                if((user.marketId!==null)&&(user.marketId.includes(marketId))){
+                    if (user.isValidPassword(password)) {
+                        var token = jwt.sign(
+                            { name: user.name, email: user.email },
+                            process.env.CRYPTR_KEY
+                        );
+                        module.exports.updateUserToStartSession(user).then(function (data) {
+                            results = {
+                                "roleId": user.roleId,
+                                name: user.name,
+                                email: user.email,
+                                token,
+                                marketId: user.marketId
+                            };
+                            response.json(results);
+                        }).catch(function (error) {
+                            response.status(401).json(error);
+                        });
+    
+                    } else {
+                        response.json({
+                            errMsg: "InCorrect Password"
+                        });
+                    }
+                }else{
+                    response.status(401).json({ errMsg: "User is not authorized for the given market" });
                 }
+                
             } else {
                 response.status(401).json({ errMsg: "Invalid Credentials" });
             }
@@ -81,7 +94,19 @@ module.exports = {
         response.json({
             message: "User Logout Successfully"
         });
-    }
+    },
+
+    updateUserToStartSession: function (usr) {
+        return new Promise(function (resolve, reject) {
+            User.updateOne({ "email": usr.email }, { isValid: true }, { new: true }).then(function (user) {
+                if (user) {
+                    resolve(user);
+                } else {
+                    reject("Update user failed.");
+                }
+            })
+        });
+    },
 };
 
 const getComponentsMap = function (request, response, results) {

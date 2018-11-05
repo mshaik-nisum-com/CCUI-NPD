@@ -185,7 +185,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
 
 @media (min-width: 768px) {
   .sidebar {
-    width: 270px !important;
+    width: 225px !important;
   }
   .sidebar .nav-item .nav-link {
     display: block;
@@ -363,7 +363,7 @@ footer.sticky-footer .copyright {
 
 @media (min-width: 768px) {
   footer.sticky-footer {
-    width: calc(100% - 225px);
+    width: 100%;
   }
 }
 

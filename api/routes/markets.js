@@ -8,6 +8,7 @@ router.get("/marketList", marketController.marketList);
 
 router.get("/fetchBrands/:marketId", marketController.fetchBrands);
 
+
 //router.post("/addMarkets", marketController.addMarkets);
 
 module.exports = router;

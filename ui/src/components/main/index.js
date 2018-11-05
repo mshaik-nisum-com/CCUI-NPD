@@ -16,7 +16,6 @@ class Main extends Component {
 	render() {
 		return (
 			<div className="container-fluid">
-				<h4>Order</h4>
 				<TabsComponent inputParams={this.state} />
 				<Footer />
 			</div>
