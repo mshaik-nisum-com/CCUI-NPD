@@ -38,14 +38,14 @@ color: white !important;
     border-top:none;
 }
 .accordionHeading{
-      background-color: #f4f4f4;
+      background-color:#3498DB;
       border-top-left-radius: 6px;
       border-top-right-radius: 6px;
       padding:12px;
       margin-top: 12px;
       margin-left: 9px;
       margin-right: 9px;
-      color:#3498DB;
+      color:white;
       border-bottom:1px solid grey;
 }
 .accordion__body{
@@ -68,6 +68,6 @@ color: white !important;
 }
 .totalPrice{
     font-weight: bold;
-    background-color: #5499C7 !important;
-    color:#ECF0F1;
+    background-color:#bfd7f1c9   !important;
+    color:black;
 }
