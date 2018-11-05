@@ -7,8 +7,9 @@ import {
     AccordionItemTitle,
     AccordionItemBody,
 } from 'react-accessible-accordion';
-import 'react-accessible-accordion/dist/fancy-example.css';
-//import 'react-accessible-accordion/dist/minimal-example.css';
+//import 'react-accessible-accordion/dist/fancyAccordion.css';
+import '../../css/fancyAccordion.css'
+//import 'react-accessible-accordion/dist/minimalAccordion.css';
 
 class SideNav extends Component {
     state = {}
