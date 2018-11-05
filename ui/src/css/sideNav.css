@@ -1,0 +1,73 @@
+.accordion__title:hover{
+background-color: #2E86C1 !important;
+color: white !important;
+}
+.span{
+    font-size: 22px;
+}
+.accordion__title {
+    background-color: #f4f4f4 !important;
+    color:#3498DB !important;
+    cursor: pointer;
+    padding: 12px !important;
+    width: 94% !important;
+    text-align: left;
+    border: none;
+    margin: 8px;
+    border-radius: 5px;
+}
+.accordion__body{
+    padding: 12px !important;
+    background-color: whitesmoke !important;
+    margin: -9px 5px 0px 8px;
+    display: block;
+    /* border-radius: 0px; */
+    animation: fadein 0.35s ease-in;
+}
+.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+}
+.promoInfo{
+    height:90px;
+    overflow-y: scroll;
+}
+.promoCard{
+    margin:0px 8px 0px 8px;
+    background-color: #f4f4f4 !important;
+    border-top:none;
+}
+.accordionHeading{
+      background-color: #f4f4f4;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      padding:12px;
+      margin-top: 12px;
+      margin-left: 9px;
+      margin-right: 9px;
+      color:#3498DB;
+      border-bottom:1px solid grey;
+}
+.accordion__body{
+      border-top:1px solid grey;
+}
+.chargesInfo{
+      background-color: #f4f4f4 ;
+      padding: 0px ;
+      margin: 0px 9px 9px 9px;
+}
+.row{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+.col-sm-7, .col-sm-5{
+    padding: 4px !important;
+}
+.col-sm-5{
+    text-align:right;
+}
+.totalPrice{
+    font-weight: bold;
+    background-color: #5499C7 !important;
+    color:#ECF0F1;
+}
